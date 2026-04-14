@@ -1,0 +1,14 @@
+
+import { createContext, useState } from "react";
+
+export const EventsContext = createContext();
+
+export function EventsProvider({ children }) {
+  const [events, setEvents] = useState([]);
+
+  return (
+    <EventsContext.Provider value={{ events, setEvents }}>
+      {children}
+    </EventsContext.Provider>
+  );
+}
