@@ -1,0 +1,23 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  font-size: var(--ds-font-size-100);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ds-color-neutral-0);
+}
+
+.success {
+  background: var(--ds-color-state-success);
+}
+
+.danger {
+  background: var(--ds-color-state-danger);
+}
+
+.warning {
+  background: var(--ds-color-yellow-300);
+}

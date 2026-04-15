@@ -1,0 +1,44 @@
+.root {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--ds-space-6);
+  padding: var(--ds-space-4) 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-size: var(--ds-font-size-400);
+  text-transform: uppercase;
+}
+
+.brandMark {
+  background: var(--ds-color-action-primary-bg);
+  color: var(--ds-color-neutral-0);
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  font-weight: var(--ds-font-weight-extrabold);
+}
+
+.search {
+  width: min(100%, 520px);
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+@media (max-width: 980px) {
+  .root {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-3);
+  }
+
+  .search {
+    width: 100%;
+  }
+}
