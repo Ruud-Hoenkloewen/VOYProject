@@ -13,19 +13,15 @@ export default function Home() {
   const events = mockEvents;
 
   return (
-    <Container style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+    <Container style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
       <Stack gap="xl">
-        <Typography variant="h2" as="h1">
-          Lo último en la movida Under
-        </Typography>
-
         <div className="tabs-container">
           <style>{`
             .tabs-container {
               display: flex;
               gap: 4px;
               overflow-x: auto;
-              padding: 10px 10px 10px 15px;
+              padding: 0 10px 10px 0;
               scrollbar-width: none;
               ms-overflow-style: none;
             }
@@ -70,6 +66,28 @@ export default function Home() {
               <span>{genre}</span>
             </button>
           ))}
+        </div>
+
+        <div className="hero-title-section" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <Typography variant="display" as="h1">
+            <span style={{ color: '#ffffff' }}>MOVIDA </span>
+            <span style={{ 
+              background: 'linear-gradient(90deg, #caff04 0%, #aaff00 30%, #d800ff 70%, #d500f9 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              TUCUMANA
+            </span>
+          </Typography>
+          <Typography variant="caption" as="p" style={{ 
+            textTransform: 'uppercase', 
+            letterSpacing: '0.25em',
+            fontWeight: '600',
+            color: 'var(--ds-color-text-muted)'
+          }}>
+            LA ESCENA EMERGENTE Y UNDERGROUND
+          </Typography>
         </div>
 
         {events.length === 0 ? (
