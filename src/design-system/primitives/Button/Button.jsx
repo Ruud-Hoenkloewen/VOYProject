@@ -24,7 +24,7 @@ export default function Button({
       className={`${styles.button} ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${fullWidth ? styles.fullWidth : ""}`}
       {...props}
     >
-      {children}
+      <span className={styles.inner}>{children}</span>
     </button>
   );
 }

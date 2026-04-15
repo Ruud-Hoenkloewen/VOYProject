@@ -21,7 +21,7 @@ export default function Home() {
           <style>{`
             .tabs-container {
               display: flex;
-              gap: 4px;
+              gap: 2px;
               overflow-x: auto;
               padding: 0 10px 10px 0;
               scrollbar-width: none;
@@ -46,7 +46,6 @@ export default function Home() {
             }
             .tab-btn span {
                transform: skewX(15deg);
-               font-style: italic;
                letter-spacing: 0.5px;
             }
             .tab-btn:hover {

@@ -23,6 +23,7 @@
 }
 
 .search {
+  justify-self: center;
   width: min(100%, 520px);
 }
 
