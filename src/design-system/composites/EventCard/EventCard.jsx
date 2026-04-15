@@ -41,7 +41,7 @@ export default function EventCard({
         <Typography variant="caption">{venue}</Typography>
         <div className={styles.actions}>
           <Button variant="ghost" size="sm">
-            Ver más
+            Ver mas
           </Button>
         </div>
       </div>
