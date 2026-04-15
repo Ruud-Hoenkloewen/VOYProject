@@ -1,0 +1,20 @@
+:root {
+  --ds-color-neutral-0: #000000;
+  --ds-color-neutral-50: #0a0b10;
+  --ds-color-neutral-100: #10121a;
+  --ds-color-neutral-200: #181b24;
+  --ds-color-neutral-300: #242836;
+  --ds-color-neutral-500: #7a8094;
+  --ds-color-neutral-700: #c2c7d5;
+  --ds-color-neutral-900: #f4f6fb;
+
+  --ds-color-lime-300: #b8ff2c;
+  --ds-color-lime-400: #a6ef1f;
+  --ds-color-lime-500: #92dc08;
+
+  --ds-color-magenta-400: #df32ff;
+  --ds-color-magenta-500: #c220e5;
+
+  --ds-color-red-400: #ff3f48;
+  --ds-color-yellow-300: #ffd84e;
+}

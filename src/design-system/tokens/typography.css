@@ -1,0 +1,22 @@
+:root {
+  --ds-font-family-base: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  --ds-font-family-display: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+
+  --ds-font-size-100: 0.75rem;
+  --ds-font-size-200: 0.875rem;
+  --ds-font-size-300: 1rem;
+  --ds-font-size-400: 1.25rem;
+  --ds-font-size-500: 1.5rem;
+  --ds-font-size-600: 2rem;
+  --ds-font-size-700: 2.5rem;
+
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+  --ds-font-weight-extrabold: 800;
+
+  --ds-line-height-tight: 1.1;
+  --ds-line-height-snug: 1.25;
+  --ds-line-height-normal: 1.5;
+}

@@ -1,0 +1,5 @@
+:root {
+  --ds-shadow-none: none;
+  --ds-shadow-card: 0 10px 24px rgba(0, 0, 0, 0.35);
+  --ds-shadow-focus-ring: 0 0 0 2px rgba(166, 239, 31, 0.5);
+}

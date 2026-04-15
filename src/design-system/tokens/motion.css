@@ -1,0 +1,6 @@
+:root {
+  --ds-motion-fast: 120ms;
+  --ds-motion-base: 180ms;
+  --ds-motion-slow: 280ms;
+  --ds-easing-standard: ease;
+}

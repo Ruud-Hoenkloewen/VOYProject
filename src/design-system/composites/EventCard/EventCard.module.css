@@ -1,0 +1,56 @@
+.card {
+  max-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.media {
+  position: relative;
+  height: 190px;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topBar {
+  position: absolute;
+  left: var(--ds-space-2);
+  right: var(--ds-space-2);
+  top: var(--ds-space-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-color-action-primary-bg);
+  background: rgba(0, 0, 0, 0.65);
+  padding: var(--ds-space-1) var(--ds-space-2);
+}
+
+.content {
+  padding: var(--ds-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  flex: 1;
+}
+
+.chips {
+  display: inline-flex;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+
+.actions {
+  margin-top: auto;
+  padding-top: var(--ds-space-3);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
