@@ -1,15 +1,30 @@
-
+import Navbar from "../components/Navbar";
 import EventCard from "../components/EventCard";
-import SearchBar from "../components/SearchBar";
-import Filters from "../components/Filters";
 
-export default function Events() {
+const events = [
+  {
+    id: 1,
+    title: "Rock Fest",
+    date: "Viernes 20:00",
+    location: "Tucumán",
+    price: "3000",
+    category: "Música",
+    image: "https://via.placeholder.com/300",
+  },
+];
+
+function Events() {
   return (
-    <div>
-      <h1>Eventos</h1>
-      <SearchBar />
-      <Filters />
-      <EventCard />
-    </div>
+    <>
+      <Navbar />
+
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {events.map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
+    </>
   );
 }
+
+export default Events;

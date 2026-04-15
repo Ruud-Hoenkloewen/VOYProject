@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Container from "../design-system/layout/Container/Container";
 import Stack from "../design-system/layout/Stack/Stack";
@@ -13,6 +14,7 @@ export default function Home() {
   const events = mockEvents;
 
   return (
+
     <Container style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
       <Stack gap="xl">
         <div className="tabs-container">
