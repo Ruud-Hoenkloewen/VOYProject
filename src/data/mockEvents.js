@@ -23,7 +23,7 @@ export const mockEvents = [
     venue: "Magic Music Box",
     price: "$6.000",
     imageUrl: "https://images.unsplash.com/photo-1549834125-82d3c48159a3?auto=format&fit=crop&w=400&q=80",
-    highlighted: true
+    highlighted: false
   },
   {
     id: 3,
