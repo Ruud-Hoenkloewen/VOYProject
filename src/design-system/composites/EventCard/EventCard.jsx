@@ -14,13 +14,14 @@ export default function EventCard({
   time = "23:00 HS",
   venue = "Robert Nesta Club",
   price = "$4.500",
+  imageUrl = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&q=80",
   highlighted = false,
 }) {
   return (
     <Card highlighted={highlighted} className={styles.card}>
       <div className={styles.media}>
         <img
-          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=60"
+          src={imageUrl}
           alt={title}
         />
         <div className={styles.topBar}>
@@ -40,7 +41,7 @@ export default function EventCard({
         <Typography variant="caption">{venue}</Typography>
         <div className={styles.actions}>
           <Button variant="ghost" size="sm">
-            Ver más
+            Ver mas
           </Button>
         </div>
       </div>
