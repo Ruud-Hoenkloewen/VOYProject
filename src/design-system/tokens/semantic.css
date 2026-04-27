@@ -1,0 +1,25 @@
+:root {
+  --ds-color-bg-canvas: var(--ds-color-neutral-0);
+  --ds-color-bg-surface: var(--ds-color-neutral-100);
+  --ds-color-bg-surface-muted: var(--ds-color-neutral-200);
+
+  --ds-color-text-primary: var(--ds-color-neutral-900);
+  --ds-color-text-secondary: var(--ds-color-neutral-700);
+  --ds-color-text-muted: var(--ds-color-neutral-500);
+
+  --ds-color-border-subtle: rgba(255, 255, 255, 0.08);
+  --ds-color-border-strong: rgba(255, 255, 255, 0.18);
+  --ds-color-border-accent: var(--ds-color-lime-400);
+
+  --ds-color-action-primary-bg: var(--ds-color-lime-400);
+  --ds-color-action-primary-text: var(--ds-color-neutral-0);
+  --ds-color-action-primary-bg-hover: var(--ds-color-lime-300);
+  --ds-color-action-primary-bg-active: var(--ds-color-lime-500);
+
+  --ds-color-action-secondary-bg: var(--ds-color-neutral-200);
+  --ds-color-action-secondary-text: var(--ds-color-neutral-900);
+
+  --ds-color-state-success: var(--ds-color-lime-400);
+  --ds-color-state-danger: var(--ds-color-red-400);
+  --ds-color-state-highlight: var(--ds-color-magenta-400);
+}

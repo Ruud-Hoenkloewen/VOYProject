@@ -1,0 +1,131 @@
+.card {
+  max-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.media {
+  position: relative;
+  height: 190px;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topBar {
+  position: absolute;
+  left: var(--ds-space-2);
+  right: var(--ds-space-2);
+  top: var(--ds-space-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-color-action-primary-bg);
+  background: rgba(0, 0, 0, 0.65);
+  padding: var(--ds-space-1) var(--ds-space-2);
+}
+
+.content {
+  padding: var(--ds-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  flex: 1;
+}
+
+.chips {
+  display: inline-flex;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+
+.actions {
+  margin-top: auto;
+  padding-top: var(--ds-space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  margin-top: var(--ds-space-2);
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  color: var(--ds-color-text-secondary);
+}
+
+.infoItem svg {
+  opacity: 0.7;
+}
+
+.artistsCount {
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-color-text-secondary);
+}
+
+/* Skeleton Styles */
+.skeletonCard {
+  pointer-events: none;
+}
+
+.skeletonMedia {
+  background-color: var(--ds-color-bg-surface-muted);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeletonText {
+  background-color: var(--ds-color-bg-surface-muted);
+  border-radius: var(--ds-radius-sm);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeletonChips {
+  height: 24px;
+  width: 120px;
+  margin-bottom: var(--ds-space-2);
+}
+
+.skeletonTitle {
+  height: 32px;
+  width: 80%;
+  margin-bottom: var(--ds-space-2);
+}
+
+.skeletonLine {
+  height: 16px;
+  width: 60%;
+  margin-bottom: var(--ds-space-1);
+}
+
+.skeletonButton {
+  height: 32px;
+  width: 80px;
+  margin-left: auto;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
