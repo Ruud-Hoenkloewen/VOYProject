@@ -5,13 +5,17 @@ import Stack from "../design-system/layout/Stack/Stack";
 import Typography from "../design-system/primitives/Typography/Typography";
 import EventCard from "../design-system/composites/EventCard/EventCard";
 import Button from "../design-system/primitives/Button/Button";
-import { mockEvents } from "../data/mockEvents";
+import { useEvents } from "../hooks/useEvents";
 
 const GENRES = ["TODOS", "PUNK", "ROCK", "INDIE", "TECHNO", "ELECTRÓNICA", "METAL", "HARDCORE", "GRUNGE"];
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("TODOS");
-  const events = mockEvents;
+  const { events, isLoading, error } = useEvents();
+
+  const filteredEvents = activeCategory === "TODOS" 
+    ? events 
+    : events.filter(evt => evt.genres.includes(activeCategory));
 
   return (
 
@@ -91,7 +95,21 @@ export default function Home() {
           </Typography>
         </div>
 
-        {events.length === 0 ? (
+        {error && (
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-critical)' }}>
+            <Typography variant="body">{error}</Typography>
+          </div>
+        )}
+
+        {isLoading ? (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: 'var(--spacing-lg)'
+          }}>
+            {[1, 2, 3, 4, 5, 6].map(i => <EventCard key={i} isLoading={true} />)}
+          </div>
+        ) : filteredEvents.length === 0 && !error ? (
           <div style={{
             textAlign: 'center',
             padding: '4rem 1rem',
@@ -111,7 +129,7 @@ export default function Home() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
             gap: 'var(--spacing-lg)'
           }}>
-            {events.map((evt) => (
+            {filteredEvents.map((evt) => (
               <EventCard
                 key={evt.id}
                 title={evt.title}

@@ -2,10 +2,10 @@ import Container from "../design-system/layout/Container/Container";
 import Stack from "../design-system/layout/Stack/Stack";
 import Typography from "../design-system/primitives/Typography/Typography";
 import EventCard from "../design-system/composites/EventCard/EventCard";
-import { mockEvents } from "../data/mockEvents";
+import { useEvents } from "../hooks/useEvents";
 
 export default function Events() {
-  const events = mockEvents;
+  const { events, isLoading, error } = useEvents();
 
   return (
     <Container style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
@@ -14,13 +14,22 @@ export default function Events() {
           Catálogo de Eventos
         </Typography>
 
+        {error && (
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-critical)' }}>
+            <Typography variant="body">{error}</Typography>
+          </div>
+        )}
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
           gap: 'var(--spacing-lg)'
         }}>
-          {events.map((evt) => (
-            <EventCard
+          {isLoading ? (
+            [1, 2, 3, 4, 5, 6].map(i => <EventCard key={i} isLoading={true} />)
+          ) : (
+            events.map((evt) => (
+              <EventCard
               key={evt.id}
               title={evt.title}
               date={evt.date}
@@ -33,7 +42,8 @@ export default function Events() {
               highlighted={evt.highlighted}
               imageUrl={evt.imageUrl}
             />
-          ))}
+            ))
+          )}
         </div>
       </Stack>
     </Container>
