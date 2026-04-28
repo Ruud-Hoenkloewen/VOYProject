@@ -82,7 +82,7 @@ export default function Home() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              TUCUMANA
+              TUCUMANAS
             </span>
           </Typography>
           <Typography variant="caption" as="p" style={{ 
