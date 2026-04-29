@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Container from "../design-system/layout/Container/Container";
 import Stack from "../design-system/layout/Stack/Stack";
 import Typography from "../design-system/primitives/Typography/Typography";
@@ -10,12 +10,46 @@ import { useEvents } from "../hooks/useEvents";
 const GENRES = ["TODOS", "PUNK", "ROCK", "INDIE", "TECHNO", "ELECTRÓNICA", "METAL", "HARDCORE", "GRUNGE"];
 
 export default function Home() {
-  const [activeCategory, setActiveCategory] = useState("TODOS");
+  // US1: Convertido a array para soportar selección múltiple
+  const [activeCategories, setActiveCategories] = useState(["TODOS"]);
   const { events, isLoading, error } = useEvents();
+  
+  // US1: Leemos el query parameter de la barra de búsqueda global
+  const [searchParams] = useSearchParams();
+  const searchQuery = (searchParams.get("q") || "").toLowerCase();
 
-  const filteredEvents = activeCategory === "TODOS" 
-    ? events 
-    : events.filter(evt => evt.genres.includes(activeCategory));
+  // MANEJADOR: Permite selección múltiple y usa "TODOS" como botón de reset
+  const toggleCategory = (genre) => {
+    if (genre === "TODOS") {
+      setActiveCategories(["TODOS"]); // Reset
+      return;
+    }
+
+    setActiveCategories((prev) => {
+      const withoutTodos = prev.filter(c => c !== "TODOS");
+      if (withoutTodos.includes(genre)) {
+        const newSelection = withoutTodos.filter(c => c !== genre);
+        return newSelection.length === 0 ? ["TODOS"] : newSelection; // Si vacía, reset
+      } else {
+        return [...withoutTodos, genre];
+      }
+    });
+  };
+
+  // LOGICA: Filtrado exhaustivo por búsqueda de texto y múltiples categorías
+  const filteredEvents = events.filter((evt) => {
+    // 1. Filtro de Búsqueda (busca en título, lugar o artistas)
+    const matchesSearch = searchQuery === "" || 
+      evt.title.toLowerCase().includes(searchQuery) ||
+      (evt.venue && evt.venue.toLowerCase().includes(searchQuery)) ||
+      (evt.artists && evt.artists.some(a => a.nombre && a.nombre.toLowerCase().includes(searchQuery)));
+      
+    // 2. Filtro de Categoría Múltiple (Soluciona el bug de mayúsculas/minúsculas)
+    const matchesCategories = activeCategories.includes("TODOS") ||
+      (evt.genres && evt.genres.some(g => activeCategories.includes(g.toUpperCase())));
+
+    return matchesSearch && matchesCategories;
+  });
 
   return (
 
@@ -65,8 +99,8 @@ export default function Home() {
           {GENRES.map((genre) => (
             <button
               key={genre}
-              className={`tab-btn ${activeCategory === genre ? 'active' : ''}`}
-              onClick={() => setActiveCategory(genre)}
+              className={`tab-btn ${activeCategories.includes(genre) ? 'active' : ''}`}
+              onClick={() => toggleCategory(genre)}
             >
               <span>{genre}</span>
             </button>

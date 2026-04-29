@@ -16,16 +16,26 @@ const MapPinIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
 );
 
+/**
+ * COMPONENTE: EventCard (US3)
+ * 
+ * PROPÓSITO: Muestra la información resumida de un evento en la grilla principal.
+ * 
+ * EDGE CASES MANEJADOS:
+ * - Si falta un dato (null/undefined), la card no se rompe gracias a los operadores `&&` y optional chaining `?.`.
+ * - Si la imagen falla o no existe, el espacio se mantiene sin romperse.
+ * - Soporta un estado `isLoading` que muestra un Skeleton de carga antes de tener los datos.
+ */
 export default function EventCard({
   id = "",
   status = "DISPONIBLE",
   statusTone = "success",
   title = "Noche de Furia en el Nesta",
-  genres = ["PUNK", "GRUNGE"],
-  date = "15 MAY 2026",
-  time = "23:00 HS",
-  venue = "Robert Nesta Club",
-  price = "$4.500",
+  genres = [],
+  date = "",
+  time = "",
+  venue = "",
+  price = "",
   imageUrl = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&q=80",
   artists = [],
   highlighted = false,
@@ -33,6 +43,7 @@ export default function EventCard({
 }) {
   const navigate = useNavigate();
 
+  // ESTADO DE CARGA: Retorna la versión Skeleton de la card
   if (isLoading) {
     return (
       <Card className={`${styles.card} ${styles.skeletonCard}`}>
@@ -51,17 +62,19 @@ export default function EventCard({
     );
   }
 
+  // RENDERIZADO SEGURO: Cada elemento comprueba la existencia de su dato antes de renderizarse
   return (
     <Card highlighted={highlighted} className={styles.card}>
       <div className={styles.media}>
-        {imageUrl && <img src={imageUrl} alt={title} />}
+        {imageUrl && <img src={imageUrl} alt={title || "Evento"} loading="lazy" />}
         <div className={styles.topBar}>
           {status && <Badge tone={statusTone}>{status}</Badge>}
           {price && <span className={styles.price}>{price}</span>}
         </div>
       </div>
       <div className={styles.content}>
-        {genres && genres.length > 0 && (
+        {/* Array seguro usando optional chaining y fallback a array vacío */}
+        {(genres || []).length > 0 && (
           <div className={styles.chips}>
             {genres.map((genre) => (
               <Chip key={genre}>{genre}</Chip>
@@ -93,7 +106,7 @@ export default function EventCard({
         </div>
         
         <div className={styles.actions}>
-          {artists && artists.length > 0 && (
+          {(artists || []).length > 0 && (
              <span className={styles.artistsCount}>+ {artists.length} Artis{artists.length === 1 ? 'ta' : 'tas'}</span>
           )}
           <Button variant="ghost" size="sm" onClick={() => id && navigate(`/events/${id}`)}>
