@@ -7,7 +7,7 @@ import EventCard from "../design-system/composites/EventCard/EventCard";
 import Button from "../design-system/primitives/Button/Button";
 import { useEvents } from "../hooks/useEvents";
 
-const GENRES = ["TODOS", "PUNK", "ROCK", "INDIE", "TECHNO", "ELECTRÓNICA", "METAL", "HARDCORE", "GRUNGE"];
+const GENRES = ["TODOS", "PUNK", "ROCK", "HARDCORE", "METAL", "GRUNGE", "POP", "ALTER ROCK"];
 
 export default function Home() {
   // US1: Convertido a array para soportar selección múltiple
@@ -55,69 +55,9 @@ export default function Home() {
 
     <Container style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
       <Stack gap="xl">
-        <div className="tabs-container">
-          <style>{`
-            .tabs-container {
-              display: flex;
-              gap: 2px;
-              overflow-x: auto;
-              padding: 0 10px 10px 0;
-              scrollbar-width: none;
-              ms-overflow-style: none;
-            }
-            .tabs-container::-webkit-scrollbar { display: none; }
-            .tab-btn {
-              background-color: #1a1a1c;
-              border: none;
-              color: #b3b3b3;
-              font-weight: 800;
-              font-size: 0.85rem;
-              padding: 10px 24px;
-              text-transform: uppercase;
-              cursor: pointer;
-              transform: skewX(-15deg);
-              transition: background-color 0.2s, color 0.2s;
-              display: inline-flex;
-              justify-content: center;
-              align-items: center;
-              white-space: nowrap;
-            }
-            .tab-btn span {
-               transform: skewX(15deg);
-               letter-spacing: 0.5px;
-            }
-            .tab-btn:hover {
-              background-color: #2a2a2c;
-              color: #fff;
-            }
-            .tab-btn.active {
-              background-color: #d500f9;
-              color: #fff;
-              border-bottom: 4px solid #9c00b8;
-            }
-          `}</style>
-          {GENRES.map((genre) => (
-            <button
-              key={genre}
-              className={`tab-btn ${activeCategories.includes(genre) ? 'active' : ''}`}
-              onClick={() => toggleCategory(genre)}
-            >
-              <span>{genre}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="hero-title-section" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="hero-title-section" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1.5rem', marginBottom: '1rem' }}>
           <Typography variant="display" as="h1">
-            <span style={{ color: '#ffffff' }}>MOVIDA </span>
-            <span style={{ 
-              background: 'linear-gradient(90deg, #caff04 0%, #aaff00 30%, #d800ff 70%, #d500f9 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              TUCUMANA
-            </span>
+            <span style={{ color: '#ffffff' }}>WELCOME TO THE POGO</span>
           </Typography>
           <Typography variant="caption" as="p" style={{ 
             textTransform: 'uppercase', 
@@ -127,6 +67,51 @@ export default function Home() {
           }}>
             LA ESCENA EMERGENTE Y UNDERGROUND
           </Typography>
+        </div>
+
+        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginBottom: '0.5rem' }}>
+          {/* GÉNERO */}
+          <div style={{ flex: '2 1 400px' }}>
+            <Typography variant="caption" style={{ textTransform: 'uppercase', color: 'var(--ds-color-text-secondary)', marginBottom: '1rem', display: 'block' }}>GÉNERO</Typography>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {GENRES.filter(g => g !== "TODOS").map(genre => (
+                <button
+                  key={genre}
+                  onClick={() => toggleCategory(genre)}
+                  style={{
+                    background: 'transparent',
+                    border: `1px solid ${activeCategories.includes(genre) ? '#d500f9' : '#d9d9d9'}`,
+                    color: activeCategories.includes(genre) ? '#d500f9' : '#d9d9d9',
+                    padding: '0.25rem 0.75rem',
+                    borderRadius: '100px',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    textTransform: 'uppercase',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {genre}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* LUGAR */}
+          <div style={{ flex: '1 1 200px' }}>
+            <Typography variant="caption" style={{ textTransform: 'uppercase', color: 'var(--ds-color-text-secondary)', marginBottom: '1rem', display: 'block' }}>LUGAR</Typography>
+            <select style={{ width: '100%', background: '#1a1a1c', border: '1px solid #333', color: '#fff', padding: '0.5rem', borderRadius: '4px', fontSize: '0.85rem', cursor: 'pointer' }}>
+              <option>Todos los lugares</option>
+            </select>
+          </div>
+
+          {/* FECHA */}
+          <div style={{ flex: '1 1 200px' }}>
+            <Typography variant="caption" style={{ textTransform: 'uppercase', color: 'var(--ds-color-text-secondary)', marginBottom: '1rem', display: 'block' }}>FECHA</Typography>
+            <select style={{ width: '100%', background: '#1a1a1c', border: '1px solid #333', color: '#fff', padding: '0.5rem', borderRadius: '4px', fontSize: '0.85rem', cursor: 'pointer' }}>
+              <option>Todas las fechas</option>
+            </select>
+          </div>
         </div>
 
         {error && (
@@ -139,7 +124,7 @@ export default function Home() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: 'var(--spacing-lg)'
+            gap: '2rem'
           }}>
             {[1, 2, 3, 4, 5, 6].map(i => <EventCard key={i} isLoading={true} />)}
           </div>
@@ -161,7 +146,7 @@ export default function Home() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: 'var(--spacing-lg)'
+            gap: '2rem'
           }}>
             {filteredEvents.map((evt) => (
               <EventCard
@@ -172,8 +157,8 @@ export default function Home() {
                 venue={evt.venue}
                 price={evt.price}
                 genres={evt.genres}
-                status={evt.status}
-                statusTone={evt.statusTone}
+                status={evt.estado || evt.status}
+                statusTone={(evt.estado || evt.status) === "AGOTADO" ? "danger" : (evt.estado || evt.status) === "ÚLTIMAS ENTRADAS" ? "warning" : "success"}
                 highlighted={evt.highlighted}
                 imageUrl={evt.imageUrl}
               />

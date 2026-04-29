@@ -6,8 +6,8 @@ export default function Navbar() {
   return (
     <header className={styles.root}>
       <div className={styles.brand}>
-        <span className={styles.brandMark}>U</span>
-        <strong>UNDERTUC</strong>
+        <span className={styles.brandMark}>V</span>
+        <strong>VOY PROJECT</strong>
       </div>
       <div className={styles.search}>
         <SearchBar />

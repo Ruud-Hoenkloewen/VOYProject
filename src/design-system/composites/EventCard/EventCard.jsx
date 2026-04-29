@@ -109,9 +109,11 @@ export default function EventCard({
           {(artists || []).length > 0 && (
              <span className={styles.artistsCount}>+ {artists.length} Artis{artists.length === 1 ? 'ta' : 'tas'}</span>
           )}
-          <Button variant="ghost" size="sm" onClick={() => id && navigate(`/events/${id}`)}>
-            VER MÁS →
-          </Button>
+          <div style={{ marginLeft: 'auto' }}>
+            <Button variant="ghost" size="sm" onClick={() => id && navigate(`/events/${id}`)}>
+              VER MÁS →
+            </Button>
+          </div>
         </div>
       </div>
     </Card>

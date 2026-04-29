@@ -7,6 +7,12 @@
   background: var(--ds-color-bg-surface);
   border-radius: var(--ds-radius-sm);
   padding-left: var(--ds-space-3);
+  transition: border-color var(--ds-motion-base) var(--ds-easing-standard), box-shadow var(--ds-motion-base) var(--ds-easing-standard);
+}
+
+.root:focus-within {
+  border-color: var(--ds-color-border-accent);
+  box-shadow: var(--ds-shadow-focus-ring);
 }
 
 .icon {
@@ -14,6 +20,8 @@
 }
 
 .input {
-  border: 0;
-  background: transparent;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
