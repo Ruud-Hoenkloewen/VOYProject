@@ -11,6 +11,8 @@ import { useSearchParams } from 'react-router-dom';
 export function useEventFilters(events = []) {
   // Estado para las categorías seleccionadas (soporta multiselección)
   const [activeCategories, setActiveCategories] = useState(["TODOS"]);
+  const [activeLugar, setActiveLugar] = useState("TODOS");
+  const [activeFecha, setActiveFecha] = useState("TODOS");
   
   // Extrae el valor de 'q' de la URL para la búsqueda global (Navbar)
   const [searchParams] = useSearchParams();
@@ -59,12 +61,29 @@ export function useEventFilters(events = []) {
     const matchesCategories = activeCategories.includes("TODOS") ||
       (evt.genres && evt.genres.some(g => activeCategories.includes(g.toUpperCase())));
 
-    return matchesSearch && matchesCategories;
+    // 3. Coincidencias de lugar
+    const matchesLugar = activeLugar === "TODOS" || evt.venue === activeLugar;
+    
+    // 4. Coincidencias de fecha
+    const matchesFecha = activeFecha === "TODOS" || evt.date === activeFecha;
+
+    return matchesSearch && matchesCategories && matchesLugar && matchesFecha;
   });
+
+  // Extraer opciones únicas dinámicamente de los eventos actuales
+  const availableLugares = [...new Set(events.map(e => e.venue).filter(Boolean))].sort();
+  // No ordenamos las fechas alfabéticamente para preservar el orden original de la DB (cronológico)
+  const availableFechas = [...new Set(events.map(e => e.date).filter(Boolean))];
 
   return {
     activeCategories,
     toggleCategory,
+    activeLugar,
+    setActiveLugar,
+    availableLugares,
+    activeFecha,
+    setActiveFecha,
+    availableFechas,
     filteredEvents
   };
 }

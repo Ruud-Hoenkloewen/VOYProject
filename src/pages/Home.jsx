@@ -15,7 +15,12 @@ const GENRES = ["TODOS", "PUNK", "ROCK", "HARDCORE", "METAL", "GRUNGE", "POP", "
  */
 export default function Home() {
   const { events, isLoading, error } = useEvents();
-  const { activeCategories, toggleCategory, filteredEvents } = useEventFilters(events);
+  const { 
+    activeCategories, toggleCategory, 
+    activeLugar, setActiveLugar, availableLugares,
+    activeFecha, setActiveFecha, availableFechas,
+    filteredEvents 
+  } = useEventFilters(events);
 
   return (
     <Container className={styles.pageContainer}>
@@ -49,16 +54,30 @@ export default function Home() {
           {/* LUGAR */}
           <div className={styles.filterGroupSmall}>
             <Typography variant="caption" className={styles.filterLabel}>LUGAR</Typography>
-            <select className={styles.filterSelect}>
-              <option>Todos los lugares</option>
+            <select 
+              className={styles.filterSelect}
+              value={activeLugar}
+              onChange={(e) => setActiveLugar(e.target.value)}
+            >
+              <option value="TODOS">Todos los lugares</option>
+              {availableLugares.map(lugar => (
+                <option key={lugar} value={lugar}>{lugar}</option>
+              ))}
             </select>
           </div>
 
           {/* FECHA */}
           <div className={styles.filterGroupSmall}>
             <Typography variant="caption" className={styles.filterLabel}>FECHA</Typography>
-            <select className={styles.filterSelect}>
-              <option>Todas las fechas</option>
+            <select 
+              className={styles.filterSelect}
+              value={activeFecha}
+              onChange={(e) => setActiveFecha(e.target.value)}
+            >
+              <option value="TODOS">Todas las fechas</option>
+              {availableFechas.map(fecha => (
+                <option key={fecha} value={fecha}>{fecha}</option>
+              ))}
             </select>
           </div>
         </div>
