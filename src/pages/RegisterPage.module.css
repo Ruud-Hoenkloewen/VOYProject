@@ -178,43 +178,6 @@
   gap: 1.5rem;
 }
 
-/* ── TOGGLE MODO ─────────────────────── */
-.modeToggle {
-  display: flex;
-  gap: 0;
-  border: 1px solid #1e1e1e;
-  width: 100%;
-  max-width: 440px;
-}
-
-.modeBtn {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: #444;
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 0.65rem 1rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.modeBtn:hover {
-  color: #888;
-}
-
-.modeBtnActive {
-  background: #fff;
-  color: #080808;
-}
-
-.modeBtnActive:hover {
-  background: #fff;
-  color: #080808;
-}
-
 /* ── FORM CARD ───────────────────────── */
 .formCard {
   width: 100%;

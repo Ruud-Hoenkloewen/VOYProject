@@ -16,7 +16,6 @@ export default function AppRouter() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
