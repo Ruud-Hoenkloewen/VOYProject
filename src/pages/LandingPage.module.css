@@ -1,0 +1,678 @@
+/* ─────────────────────────────────────────
+   LandingPage.module.css
+   Estética editorial underground — Sub Pop / Factory Records / Pitchfork
+   Paleta: negro #080808 · verde ácido #c6ff00 · fucsia #d500f9
+───────────────────────────────────────── */
+
+/* ── ANIMACIONES DE SCROLL ─────────────── */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── HEADER → ver EditorialHeader.module.css ─────────── */
+/* Los estilos del header están en el componente compartido */
+
+.page {
+  background: #080808;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Compensa el header fixed (~60px) */
+  padding-top: 60px;
+}
+
+/* ── HERO ──────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 90vh;
+  padding: 6rem 4rem 4rem;
+  gap: 2rem;
+  position: relative;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d500f9;
+  white-space: nowrap;
+}
+
+/* Línea que se extiende a la derecha del eyebrow */
+.heroEyebrow::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: #222;
+}
+
+.heroTitle {
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.heroTitleAccent {
+  color: #c6ff00;
+}
+
+.heroSubtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #666;
+  margin: 0;
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: #aaa;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 420px;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* GRAIN OVERLAY — textura de película análoga (sutil) */
+.heroGrain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+}
+
+/* META STRIP del flyer — datos del evento bajo el botón VER DETALLES */
+.flyerMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.flyerMetaDot {
+  font-size: 0.42rem;
+  color: #222;
+}
+
+@keyframes liveBlink {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+.flyerMetaBlink {
+  color: #c6ff00;
+  animation: liveBlink 1.4s ease-in-out infinite;
+}
+
+
+/* ── BOTONES CTA ───────────────────────── */
+.ctaPrimary {
+  display: inline-block;
+  background: #c6ff00;
+  color: #080808;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border: 2px solid #c6ff00;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ctaPrimary:hover {
+  background: #080808;
+  color: #c6ff00;
+}
+
+.ctaSecondary {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border: 2px solid #fff;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ctaSecondary:hover {
+  background: #fff;
+  color: #080808;
+}
+
+/* ── BARRA "SHOW DESTACADO" (pre-hero) ─── */
+/* Usa el mismo padding horizontal que el hero para alinearse */
+.heroSectionLabel {
+  padding: 0 4rem;
+  margin-bottom: 0;   /* el hero ya tiene padding-top propio */
+}
+
+/* Botón CTA que ocupa todo el ancho disponible — paleta editorial mono */
+.ctaFull {
+  width: 100%;
+  text-align: center;
+  /* Override del ctaPrimary: reemplaza lime por monocromo editorial */
+  background: transparent !important;
+  color: #888 !important;
+  border-color: #2a2a2a !important;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  padding: 0.65rem 1.5rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s !important;
+}
+
+.ctaFull:hover {
+  background: #fff !important;
+  color: #080808 !important;
+  border-color: #fff !important;
+}
+
+/* ── FLYER CARD — estructura 3 capas ─────────────────────
+   flyerOuter (column, sin filter) → flyerShadowWrap (filter) → flyerCard (tilt)
+   Separar el filter del tilt evita que el drop-shadow clip los spans de corner
+───────────────────────────────────────────────────────── */
+.flyerOuter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.flyerShadowWrap {
+  filter: drop-shadow(0 20px 55px rgba(0,0,0,0.65));
+  transition: filter 0.3s;
+}
+
+.flyerShadowWrap:hover {
+  filter: drop-shadow(0 28px 70px rgba(0,0,0,0.8));
+}
+
+.flyerCard {
+  position: relative;
+  /* padding crea un área transparente alrededor de la imagen:
+     los corners en top:0/left:0 quedan fuera del contenido visual */
+  padding: 14px;
+  width: fit-content;
+  transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: crosshair;
+  overflow: visible;
+}
+
+/* ── Corners como spans reales (no ::before/::after) ── */
+.flyerCornerTL,
+.flyerCornerBR {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: #c6ff00;
+  border-style: solid;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.flyerCard:hover .flyerCornerTL,
+.flyerCard:hover .flyerCornerBR { opacity: 1; }
+
+/* top:0/left:0 → esquina del card (con padding → fuera de la imagen) */
+.flyerCornerTL {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.flyerCornerBR {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Botón editorial "Ver detalles" ── */
+.flyerEventLink {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888;
+  text-decoration: none;
+  border: 1px solid #2a2a2a;
+  padding: 0.55rem 1.4rem;
+  background: transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.flyerEventLink:hover {
+  background: #fff;
+  color: #080808;
+  border-color: #fff;
+}
+
+.flyerImg {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+  user-select: none;
+}
+
+/* ── HERO BRACKET CARD ─────────────────── */
+.heroDecoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroBracketCard {
+  position: relative;
+  background: #111;
+  padding: 2rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.bracketTL,
+.bracketBR {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #c6ff00;
+  border-style: solid;
+}
+
+.bracketTL {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+
+.bracketBR {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
+.bracketCardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bracketCardDate {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #c6ff00;
+  text-transform: uppercase;
+}
+
+.bracketCardArtists {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.bracketCardGenre {
+  display: inline-block;
+  background: #222;
+  color: #d500f9;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #d500f9;
+  width: fit-content;
+}
+
+.bracketCardVenue {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+.bracketCardPrice {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #c6ff00;
+  margin-top: 0.25rem;
+}
+
+/* ── MARQUEE TICKER ────────────────────── */
+.marqueeWrapper {
+  background: #c6ff00;
+  overflow: hidden;
+  padding: 0.6rem 0;
+  white-space: nowrap;
+}
+
+.marqueeTrack {
+  display: inline-flex;
+  animation: marquee 28s linear infinite;
+}
+
+.marqueeItem {
+  color: #080808;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 2rem;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── SECCIÓN COMÚN ─────────────────────── */
+.features,
+.eventsPreview,
+.genresSection {
+  padding: 3.5rem 4rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.sectionLabel {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d500f9;
+  white-space: nowrap;
+}
+
+.sectionDivider {
+  flex: 1;
+  height: 1px;
+  background: #222;
+  /* Sin margin-bottom: vive dentro del flex row, al lado del label */
+}
+
+
+.seeAllLink {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.seeAllLink:hover {
+  color: #c6ff00;
+}
+
+/* ── QUÉ ES VOY ────────────────────────── */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.featureCard {
+  border: 1px solid #1a1a1a;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.featureCard:hover {
+  border-color: #c6ff00;
+  background: #0f0f0f;
+}
+
+.featureIcon {
+  font-size: 1.75rem;
+}
+
+.featureTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: #fff;
+}
+
+.featureDescription {
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── TICKER DE EVENTOS ─────────────────── */
+
+/* Contenedor con overflow oculto y máscaras de fade lateral */
+.eventsTicker {
+  overflow: hidden;
+  /* Fade lateral para que las cards entren y salgan suavemente */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  margin-bottom: 2.5rem;
+}
+
+/* Track animado que se desliza */
+.eventsTrack {
+  display: flex;
+  gap: 1.5rem;
+  /* Ancho: necesita ser suficiente para contener el doble de cards */
+  width: max-content;
+  animation: eventsScroll 32s linear infinite;
+}
+
+/* Pausa al hacer hover en cualquier parte del ticker */
+.eventsTicker:hover .eventsTrack {
+  animation-play-state: paused;
+}
+
+/* Cada item del ticker — ancho fijo para que las cards sean uniformes */
+.eventsTickerItem {
+  flex: 0 0 340px;
+  /* Sutil elevación en hover para dar feedback */
+  transition: transform 0.25s ease;
+}
+
+.eventsTickerItem:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes eventsScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* (El antiguo .eventsGrid ya no se usa, pero lo dejamos comentado por si acaso) */
+/* .eventsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } */
+
+
+.eventsCtaWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* ── GÉNEROS ───────────────────────────── */
+.genresGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.genreChip {
+  border: 1px solid #333;
+  color: #666;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  transition: border-color 0.2s, color 0.2s, opacity 0.5s ease, transform 0.5s ease;
+  cursor: default;
+}
+
+.genreChip:hover {
+  border-color: #d500f9;
+  color: #d500f9;
+}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid #1a1a1a;
+  margin-top: 2rem;
+}
+
+.footerBar {
+  background: #c6ff00;
+  color: #080808;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.65rem 2rem;
+}
+
+/* ── RESPONSIVE ────────────────────────── */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    min-height: auto;
+  }
+
+  .heroDecoration {
+    display: none;
+  }
+
+  .heroCtas {
+    justify-content: center;
+  }
+
+  .heroDescription {
+    max-width: 100%;
+  }
+
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .eventsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features,
+  .eventsPreview,
+  .genresSection {
+    padding: 3rem 2rem;
+  }
+
+  .footerMain {
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eventsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .features,
+  .eventsPreview,
+  .genresSection {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .footerNav {
+    gap: 1rem;
+  }
+}

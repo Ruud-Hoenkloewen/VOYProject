@@ -1,18 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import Events from "../pages/Events";
-import Navbar from "../design-system/composites/Navbar/Navbar";
-import Container from "../design-system/layout/Container/Container";
+import LandingPage from "../pages/LandingPage";
+import EventsPage from "../pages/EventsPage";
+import RegisterPage from "../pages/RegisterPage";
 
+/**
+ * Cada página gestiona su propio header:
+ * - LandingPage  → header editorial con nav links
+ * - EventsPage   → Navbar con buscador
+ * - RegisterPage → nav mínima (sin header completo)
+ */
 export default function AppRouter() {
   return (
     <BrowserRouter>
-      <Container>
-        <Navbar /> 
-      </Container>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
