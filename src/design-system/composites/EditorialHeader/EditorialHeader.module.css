@@ -1,0 +1,147 @@
+/* ─────────────────────────────────────────────────────────
+   EditorialHeader.module.css
+   Estética Warp Records — monocromático, sin neon.
+   Paleta: #0a0a0a · #fff · #3a3a3a · borde #1e1e1e
+───────────────────────────────────────────────────────── */
+
+.header {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 4rem;
+
+  /* Posicionamiento */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  /* Monocromático — negro sólido, un solo color */
+  background: #0a0a0a;
+  border-bottom: 1px solid #1e1e1e;
+
+  /* Animación: translate en Y para el hide/show */
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* ── Estado HIDDEN (scroll abajo) ─────────────────────── */
+.hidden {
+  transform: translateY(-100%);
+}
+
+/* ── LOGO ─────────────────────────────────────────────── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.logoBox {
+  /* Caja cuadrada — blanco sobre negro, sin neon */
+  background: #ffffff;
+  color: #0a0a0a;
+  font-weight: 900;
+  font-size: 0.8rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.logoText {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* Blanco ligeramente apagado — menos agresivo que puro #fff */
+  color: #d4d4d4;
+}
+
+/* ── NAV LINKS ────────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navLink {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Gris medio — no tan saturado, suave a la vista */
+  color: #555;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.navLink:hover {
+  color: #aaa;
+}
+
+/* Link activo — blanco con subrayado sutil, sin neon */
+.navLinkActive {
+  color: #e8e8e8;
+  border-bottom-color: #e8e8e8;
+}
+
+/* ── CTA (botón derecho) ──────────────────────────────── */
+.cta {
+  display: inline-block;
+  /* Outline style — más suave que el block sólido neon */
+  background: transparent;
+  color: #c8c8c8;
+  border: 1px solid #3a3a3a;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  flex-shrink: 0;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.cta:hover {
+  border-color: #888;
+  color: #fff;
+  background: #111;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .nav {
+    gap: 1.25rem;
+  }
+
+  .navLink {
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    display: none;
+  }
+}

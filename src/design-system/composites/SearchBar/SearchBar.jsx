@@ -1,11 +1,27 @@
+import { useSearchParams } from "react-router-dom";
 import Input from "../../primitives/Input/Input";
 import styles from "./SearchBar.module.css";
 
-export default function SearchBar({
-  value,
-  onChange,
-  placeholder = "Buscar bandas, lugares, fechas..."
-}) {
+/**
+ * COMPONENTE: SearchBar
+ * OBJETIVO: Barra de búsqueda global. 
+ * FUNCIONAMIENTO: Lee y escribe el query parameter '?q=' en la URL para sincronizarse con la vista principal sin props.
+ */
+export default function SearchBar({ placeholder = "Buscar bandas, lugares, fechas..." }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    if (value) {
+      searchParams.set("q", value);
+    } else {
+      searchParams.delete("q");
+    }
+    // replace: true evita llenar el historial de navegación con cada pulsación de tecla
+    setSearchParams(searchParams, { replace: true });
+  };
+
   return (
     <div className={styles.root} style={{ position: "relative" }}>
       
@@ -14,18 +30,20 @@ export default function SearchBar({
         🔍
       </span>
 
-      {/* INPUT */}
-      <Input
-        className={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+      <Input 
+        className={styles.input} 
+        placeholder={placeholder} 
+        value={query}
+        onChange={handleSearch}
       />
 
       {/* BOTÓN LIMPIAR */}
-      {value && (
+      {query && (
         <span
-          onClick={() => onChange("")}
+          onClick={() => {
+            searchParams.delete("q");
+            setSearchParams(searchParams, { replace: true });
+          }}
           style={{
             position: "absolute",
             right: "10px",
