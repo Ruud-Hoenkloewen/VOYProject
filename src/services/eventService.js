@@ -48,3 +48,28 @@ export const fetchEvents = async () => {
     highlighted: false // Por defecto, se puede manejar lógica extra luego
   }));
 };
+
+export const fetchEventById = async (id) => {
+  const response = await api.get(`/events/${id}`);
+  const evt = response.data;
+  
+  if (!evt) {
+    const err = new Error("Not found");
+    err.response = { status: 404 };
+    throw err;
+  }
+  
+  return {
+    id: evt._id,
+    title: evt.nombre,
+    imageUrl: evt.imagen,
+    genres: evt.generos || [],
+    date: formatDate(evt.fecha),
+    time: `${evt.hora} HS`,
+    venue: evt.lugar,
+    price: formatPrice(evt.precio),
+    artists: evt.artistas || [],
+    status: evt.estado,
+    statusTone: mapStatusTone(evt.estado),
+  };
+};

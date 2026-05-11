@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 import styles from "./EditorialHeader.module.css";
 
 /**
@@ -14,6 +15,14 @@ import styles from "./EditorialHeader.module.css";
 export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login" }) {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const { isAuthenticated, logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    navigate('/');
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -84,9 +93,18 @@ export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login"
       </nav>
 
       {/* CTA */}
-      <Link to={ctaTo} className={styles.cta}>
-        {ctaLabel}
-      </Link>
+      {isAuthenticated ? (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span style={{ color: 'var(--ds-color-text-secondary)' }}>{user?.nombre}</span>
+          <button onClick={handleLogout} className={styles.cta} style={{ background: 'transparent', border: '1px solid var(--ds-color-border-strong)' }}>
+            SALIR
+          </button>
+        </div>
+      ) : (
+        <Link to={ctaTo} className={styles.cta}>
+          {ctaLabel}
+        </Link>
+      )}
     </header>
   );
 }
