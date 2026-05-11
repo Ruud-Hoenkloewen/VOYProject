@@ -138,8 +138,7 @@ function FlyerCard() {
  * Ruta: /
  */
 export default function LandingPage() {
-  const { events, isLoading } = useEvents();
-  const previewEvents = events.slice(0, 3);
+  const { events: previewEvents, isLoading } = useEvents({ limit: 4 });
 
   useScrollAnimation();
 
