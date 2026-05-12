@@ -29,101 +29,51 @@ const mapStatusTone = (status) => {
   }
 };
 
-// MOCK DATA TEMPORAL
-const mockEvents = [
-  {
-    _id: "69ffc21b6e20dc6302526a4f",
-    nombre: "Festival de Rock Tucumano",
-    imagen: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=800&q=80",
-    generos: ["Rock", "Alternativo"],
-    fecha: "2026-05-20T00:00:00.000Z",
-    hora: "21:00",
-    lugar: "Club Tucumán BB",
-    precio: 5000,
-    artistas: [{ nombre: "Banda A" }, { nombre: "Banda B" }],
-    estado: "DISPONIBLE"
-  },
-  {
-    _id: "mock_2",
-    nombre: "Feria Gastronómica",
-    imagen: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
-    generos: ["Culinaria"],
-    fecha: "2026-04-30T00:00:00.000Z",
-    hora: "12:00",
-    lugar: "Parque 9 de Julio",
-    precio: 0,
-    artistas: [{ nombre: "Chef Local" }],
-    estado: "ÚLTIMAS ENTRADAS"
-  },
-  {
-    _id: "mock_3",
-    nombre: "Cine bajo las estrellas",
-    imagen: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80",
-    generos: ["Cine", "Familiar"],
-    fecha: "2026-05-15T00:00:00.000Z",
-    hora: "20:30",
-    lugar: "Plaza Independencia",
-    precio: 2000,
-    artistas: [{ nombre: "Director Invitado" }],
-    estado: "AGOTADO"
-  }
-];
-
 export const fetchEvents = async (params = {}) => {
-  // Cuando vuelvan a habilitar la API real, esto enviará el query string (ej: ?limit=4)
-  // const response = await api.get('/events', { params });
-  // const backendEvents = response.data;
-  
-  // Simulando llamada a API
-  await new Promise(resolve => setTimeout(resolve, 800));
-  
-  // Simulamos el límite en los Mocks si existe el parámetro
-  let backendEvents = [...mockEvents];
-  if (params.limit) {
-    backendEvents = backendEvents.slice(0, Number(params.limit));
-  }
+  try {
+    const response = await api.get('/events', { params });
+    const backendEvents = response.data;
 
-  return backendEvents.map(evt => ({
-    id: evt._id,
-    title: evt.nombre,
-    imageUrl: evt.imagen,
-    genres: evt.generos || [],
-    date: formatDate(evt.fecha),
-    time: `${evt.hora} HS`,
-    venue: evt.lugar,
-    price: formatPrice(evt.precio),
-    artists: evt.artistas || [],
-    status: evt.estado,
-    statusTone: mapStatusTone(evt.estado),
-    highlighted: false
-  }));
+    return backendEvents.map(evt => ({
+      id: evt._id,
+      title: evt.nombre,
+      imageUrl: evt.imagen || 'https://via.placeholder.com/400',
+      genres: evt.generos || [],
+      date: evt.fecha ? formatDate(evt.fecha) : 'Fecha a confirmar',
+      time: evt.hora ? `${evt.hora} HS` : '',
+      venue: evt.lugar || 'Lugar a confirmar',
+      price: evt.precio !== undefined ? formatPrice(evt.precio) : formatPrice(0),
+      artists: evt.artistas || [],
+      status: evt.estado || 'DISPONIBLE',
+      statusTone: mapStatusTone(evt.estado || 'DISPONIBLE'),
+      highlighted: false
+    }));
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    throw new Error(error.response?.data?.mensaje || "Error al obtener eventos del servidor");
+  }
 };
 
 export const fetchEventById = async (id) => {
-  // const response = await api.get(`/events/${id}`);
-  // const evt = response.data;
-  
-  // Simulando llamada a API
-  await new Promise(resolve => setTimeout(resolve, 800));
-  const evt = mockEvents.find(e => e._id === id);
-  
-  if (!evt) {
-    const err = new Error("Not found");
-    err.response = { status: 404 };
-    throw err;
+  try {
+    const response = await api.get(`/events/${id}`);
+    const evt = response.data;
+    
+    return {
+      id: evt._id,
+      title: evt.nombre,
+      imageUrl: evt.imagen || 'https://via.placeholder.com/400',
+      genres: evt.generos || [],
+      date: evt.fecha ? formatDate(evt.fecha) : 'Fecha a confirmar',
+      time: evt.hora ? `${evt.hora} HS` : '',
+      venue: evt.lugar || 'Lugar a confirmar',
+      price: evt.precio !== undefined ? formatPrice(evt.precio) : formatPrice(0),
+      artists: evt.artistas || [],
+      status: evt.estado || 'DISPONIBLE',
+      statusTone: mapStatusTone(evt.estado || 'DISPONIBLE'),
+    };
+  } catch (error) {
+    console.error(`Error fetching event ${id}:`, error);
+    throw new Error(error.response?.data?.mensaje || "Error al obtener detalles del evento");
   }
-  
-  return {
-    id: evt._id,
-    title: evt.nombre,
-    imageUrl: evt.imagen,
-    genres: evt.generos || [],
-    date: formatDate(evt.fecha),
-    time: `${evt.hora} HS`,
-    venue: evt.lugar,
-    price: formatPrice(evt.precio),
-    artists: evt.artistas || [],
-    status: evt.estado,
-    statusTone: mapStatusTone(evt.estado),
-  };
 };
