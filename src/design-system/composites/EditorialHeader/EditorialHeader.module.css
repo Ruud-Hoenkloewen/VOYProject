@@ -23,13 +23,15 @@
   border-bottom: 1px solid #1e1e1e;
 
   /* Animación: translate en Y para el hide/show */
-  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), background 0.38s ease, border-color 0.38s ease;
   will-change: transform;
 }
 
-/* ── Estado HIDDEN (scroll abajo) ─────────────────────── */
+/* ── Estado HIDDEN (scroll abajo) — Inspiración Warp Records ── */
 .hidden {
-  transform: translateY(-100%);
+  transform: translateY(calc(-100% + 4px));
+  background: #e8e8e8;
+  border-bottom-color: #e8e8e8;
 }
 
 /* ── LOGO ─────────────────────────────────────────────── */

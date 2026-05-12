@@ -194,11 +194,11 @@ export default function LandingPage() {
       {/* ── MARQUEE TICKER ───────────────────────────────────── */}
       <div className={styles.marqueeWrapper} aria-hidden="true">
         <div className={styles.marqueeTrack}>
-          {["TOQUE PUNK UNDER", "FESTIVAL DE ROCK TUCUMANO", "NOCHE DE GRUNGE ALTERNATIVO", "APOYÁ LA ESCENA LOCAL", "SAN MIGUEL DE TUCUMÁN", "ENCUENTRO DE METAL EXTREMO", "CICLO DE POP INDIE"].map((item, i) => (
+          {["SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT"].map((item, i) => (
             <span key={i} className={styles.marqueeItem}>♦ {item}</span>
           ))}
           {/* Duplicado para el loop infinito */}
-          {["TOQUE PUNK UNDER", "FESTIVAL DE ROCK TUCUMANO", "NOCHE DE GRUNGE ALTERNATIVO", "APOYÁ LA ESCENA LOCAL", "SAN MIGUEL DE TUCUMÁN", "ENCUENTRO DE METAL EXTREMO", "CICLO DE POP INDIE"].map((item, i) => (
+          {["SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT", "SAN MIGUEL DE TUCUMÁN", "VOY PROJECT"].map((item, i) => (
             <span key={`dup-${i}`} className={styles.marqueeItem} aria-hidden="true">♦ {item}</span>
           ))}
         </div>
@@ -207,13 +207,13 @@ export default function LandingPage() {
       {/* ── QUÉ ES VOY ───────────────────────────────────────── */}
       <section className={styles.features}>
         <div className={styles.sectionHeader} data-animate>
-          <span className={styles.sectionLabel}>♦ QUÉ ES VOY</span>
           <div className={styles.sectionDivider} />
-          <span className={styles.sectionSpacer} />
+          <span className={styles.sectionLabel}>♦ QUÉ ES VOY ♦</span>
+          <div className={styles.sectionDivider} />
         </div>
         <div className={styles.featuresGrid}>
           {FEATURES.map((f, i) => (
-            <div key={i} className={styles.featureCard} data-animate style={{ transitionDelay: `${i * 80}ms` }}>
+            <div key={i} className={styles.featureCard} data-animate style={{ "--entry-delay": `${i * 80}ms` }}>
               <span className={styles.featureIcon}>{f.icon}</span>
               <h3 className={styles.featureTitle}>{f.title}</h3>
               <p className={styles.featureDescription}>{f.description}</p>
@@ -225,9 +225,9 @@ export default function LandingPage() {
       {/* ── LA ESCENA — GÉNEROS ─────────────────────────────── */}
       <section className={styles.genresSection}>
         <div className={styles.sectionHeader} data-animate>
-          <span className={styles.sectionLabel}>♦ LA ESCENA</span>
           <div className={styles.sectionDivider} />
-          <span className={styles.sectionSpacer} />
+          <span className={styles.sectionLabel}>♦ NUESTROS GÉNEROS ♦</span>
+          <div className={styles.sectionDivider} />
         </div>
         <div className={styles.genresGrid}>
           {GENRES.map((g, i) => (
@@ -235,7 +235,7 @@ export default function LandingPage() {
               key={i}
               className={styles.genreCard}
               data-animate
-              style={{ transitionDelay: `${i * 60}ms` }}
+              style={{ "--entry-delay": `${i * 60}ms` }}
             >
               <span className={styles.genreCardIcon}>{g.icon}</span>
               <h3 className={styles.genreCardName}>{g.name}</h3>
@@ -248,9 +248,9 @@ export default function LandingPage() {
       {/* ── EVENTOS DESTACADOS — ticker horizontal ───────────── */}
       <section className={styles.eventsPreview}>
         <div className={styles.sectionHeader} data-animate>
-          <span className={styles.sectionLabel}>♦ EN CARTELERA</span>
           <div className={styles.sectionDivider} />
-          <Link to="/events" className={styles.seeAllLink}>VER TODOS &gt;</Link>
+          <span className={styles.sectionLabel}>♦ EN CARTELERA ♦</span>
+          <div className={styles.sectionDivider} />
         </div>
 
         {/* Ticker: overflow oculto + track animado */}

@@ -5,13 +5,17 @@
 ───────────────────────────────────────── */
 
 /* ── PAGE WRAPPER ──────────────────────────────────────── */
+.pageWrapper {
+  background: var(--ds-color-bg-editorial);
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+}
+
 .pageContainer {
   /* Compensa el header fixed (~60px altura) */
   padding-top: calc(60px + 3rem);
   padding-bottom: 4rem;
-  background: #080808;
-  min-height: 100vh;
-  color: #fff;
 }
 
 /* ── HERO: centrado con buscador ───────────────────────── */

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import styles from "./EditorialHeader.module.css";
 
@@ -11,6 +11,7 @@ import styles from "./EditorialHeader.module.css";
 export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login" }) {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
@@ -56,7 +57,15 @@ export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login"
 
   return (
     <>
-      <header className={`${styles.header} ${hidden ? styles.hidden : ""}`}>
+      <header
+        className={`${styles.header} ${hidden ? styles.hidden : ""}`}
+        onMouseEnter={() => setHidden(false)}
+        onMouseLeave={() => {
+          if (location.pathname !== "/" && window.scrollY > 60) {
+            setHidden(true);
+          }
+        }}
+      >
         {/* LOGO */}
         <Link to="/" className={styles.logo} onClick={closeMenu}>
           <span className={styles.logoBox}>V</span>

@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 
 // ── Lazy loading — cada ruta descarga su chunk solo cuando se necesita
@@ -8,6 +8,15 @@ const EventsPage      = lazy(() => import("../pages/EventsPage"));
 const EventDetailPage = lazy(() => import("../pages/EventDetailPage"));
 const RegisterPage    = lazy(() => import("../pages/RegisterPage"));
 const LoginPage       = lazy(() => import("../pages/LoginPage"));
+
+/** Componente utilitario para resetear el scroll al principio al cambiar de ruta */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 /** Fallback minimalista durante la carga del chunk */
 function PageLoader() {
@@ -37,6 +46,7 @@ export default function AppRouter() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/"           element={<LandingPage />} />

@@ -28,7 +28,7 @@ export default function EventsPage() {
   } = useEventFilters(events);
 
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <EditorialHeader ctaLabel="ACCEDER" ctaTo="/login" />
 
       <Container className={styles.pageContainer}>
@@ -36,8 +36,8 @@ export default function EventsPage() {
 
           {/* ── HERO ─────────────────────────────────────── */}
           <div className={styles.heroSection}>
-            <h1 className={styles.heroTitle}>WELCOME TO THE POGO</h1>
-            <p className={styles.heroSubtitle}>LA ESCENA EMERGENTE Y UNDERGROUND</p>
+            <h1 className={styles.heroTitle}>BIENVENIDO A LA BUENA MÚSICA</h1>
+            <p className={styles.heroSubtitle}>SELECCIONÁ TUS FILTROS O BUSCÁ EVENTOS</p>
             <div className={styles.heroSearch}>
               <SearchBar placeholder="Buscar bandas, lugares, fechas..." />
             </div>
@@ -131,6 +131,6 @@ export default function EventsPage() {
 
         </Stack>
       </Container>
-    </>
+    </div>
   );
 }

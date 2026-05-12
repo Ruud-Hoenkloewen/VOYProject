@@ -8,7 +8,7 @@
 [data-animate] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease var(--entry-delay, 0s), transform 0.5s ease var(--entry-delay, 0s);
 }
 
 [data-animate].visible {
@@ -478,12 +478,32 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease, transform 0.5s ease;
+  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease var(--entry-delay, 0s), transform 0.5s ease var(--entry-delay, 0s);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Línea fucsia en la parte superior al hacer hover para coincidir con el estilo de LA ESCENA */
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ds-color-accent-secondary);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  transform-origin: left;
 }
 
 .featureCard:hover {
-  border-color: var(--ds-color-accent-primary);
+  border-color: var(--ds-color-accent-secondary);
   background: var(--ds-color-bg-editorial-surface);
+}
+
+.featureCard:hover::before {
+  transform: scaleX(1);
 }
 
 .featureIcon {
@@ -497,6 +517,11 @@
   letter-spacing: 0.05em;
   margin: 0;
   color: var(--ds-color-text-primary);
+  transition: color 0.2s;
+}
+
+.featureCard:hover .featureTitle {
+  color: var(--ds-color-accent-secondary);
 }
 
 .featureDescription {
@@ -582,7 +607,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease, transform 0.5s ease;
+  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease var(--entry-delay, 0s), transform 0.5s ease var(--entry-delay, 0s);
   position: relative;
   overflow: hidden;
 }
@@ -597,7 +622,7 @@
   height: 2px;
   background: var(--ds-color-accent-secondary);
   transform: scaleX(0);
-  transition: transform 0.25s ease;
+  transition: transform 0.2s ease;
   transform-origin: left;
 }
 
