@@ -1,4 +1,31 @@
+# Dependencias
 node_modules/
+
+# Compilación de Producción
 dist/
+dist-ssr/
+*.local
+
+# Entorno
 .env
+.env.*
+!.env.example
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Configuraciones de Editores e IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
