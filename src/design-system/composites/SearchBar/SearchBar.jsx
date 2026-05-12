@@ -23,16 +23,40 @@ export default function SearchBar({ placeholder = "Buscar bandas, lugares, fecha
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={{ position: "relative" }}>
+      
+      {/* ICONO */}
       <span className={styles.icon} aria-hidden>
         🔍
       </span>
+
       <Input 
         className={styles.input} 
         placeholder={placeholder} 
         value={query}
         onChange={handleSearch}
       />
+
+      {/* BOTÓN LIMPIAR */}
+      {query && (
+        <span
+          onClick={() => {
+            searchParams.delete("q");
+            setSearchParams(searchParams, { replace: true });
+          }}
+          style={{
+            position: "absolute",
+            right: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            cursor: "pointer",
+            color: "#aaa",
+            fontSize: "14px"
+          }}
+        >
+          ✕
+        </span>
+      )}
     </div>
   );
 }
