@@ -3,6 +3,8 @@ import LandingPage from "../pages/LandingPage";
 import EventsPage from "../pages/EventsPage";
 import EventDetailPage from "../pages/EventDetailPage";
 import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
+import { AuthProvider } from "../context/AuthContext";
 
 /**
  * Cada página gestiona su propio header:
@@ -13,6 +15,16 @@ import RegisterPage from "../pages/RegisterPage";
  */
 export default function AppRouter() {
   return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />

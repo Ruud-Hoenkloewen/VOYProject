@@ -1,5 +1,6 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import { useAuth } from "../../../context/AuthContext";
 import styles from "./Navbar.module.css";
 
 /**
@@ -10,6 +11,14 @@ import styles from "./Navbar.module.css";
  * NO se usa en LandingPage — esta tiene su propio header editorial.
  */
 export default function Navbar() {
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <header className={styles.root}>
       <Link to="/" className={styles.brand}>
@@ -30,8 +39,22 @@ export default function Navbar() {
         >
           Explorar Eventos
         </NavLink>
-        <Link to="/login" className={styles.actionGhost}>Ingresar</Link>
-        <Link to="/register" className={styles.actionPrimary}>Crear Evento</Link>
+        
+        {isAuthenticated ? (
+          <>
+            <span style={{ color: 'var(--ds-color-text-primary)', fontWeight: '500', marginRight: '8px' }}>
+              Hola, {user.nombre || 'Usuario'}
+            </span>
+            <button onClick={handleLogout} className={styles.actionGhost} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+              Salir
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className={styles.actionGhost}>Ingresar</Link>
+            <Link to="/register" className={styles.actionPrimary}>Crear Evento</Link>
+          </>
+        )}
       </nav>
     </header>
   );
