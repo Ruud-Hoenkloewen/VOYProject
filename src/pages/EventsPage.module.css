@@ -1,0 +1,155 @@
+/* ─────────────────────────────────────────
+   EventsPage.module.css
+   Paleta editorial: negro #080808 · verde ácido #c6ff00 · fucsia #d500f9
+   Header → ver EditorialHeader.module.css (componente compartido)
+───────────────────────────────────────── */
+
+/* ── PAGE WRAPPER ──────────────────────────────────────── */
+.pageContainer {
+  /* Compensa el header fixed (~60px altura) */
+  padding-top: calc(60px + 3rem);
+  padding-bottom: 4rem;
+  background: #080808;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* ── HERO: centrado con buscador ───────────────────────── */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0;
+}
+
+.heroSubtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #555;
+  margin: 0;
+}
+
+.heroSearch {
+  width: 100%;
+  max-width: 580px;
+  margin-top: 0.5rem;
+}
+
+/* ── FILTROS ───────────────────────────────────────────── */
+.filtersRow {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.filterGroupLarge {
+  flex: 2 1 400px;
+}
+
+.filterGroupSmall {
+  flex: 1 1 200px;
+}
+
+.filterLabel {
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 1rem;
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.genresList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.genreBtn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.genreBtn:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.genreBtnActive {
+  border-color: #d500f9;
+  color: #d500f9;
+}
+
+.filterSelect {
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ── GRILLA DE EVENTOS ─────────────────────────────────── */
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* ── ESTADOS ───────────────────────────────────────────── */
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  color: #ff4444;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #111;
+  border: 1px solid #222;
+}
+
+.emptyStateText {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pageContainer {
+    padding-top: calc(56px + 2rem);
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+
+  .heroSearch {
+    max-width: 100%;
+  }
+}

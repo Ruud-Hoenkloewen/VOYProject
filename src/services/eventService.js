@@ -24,27 +24,56 @@ const mapStatusTone = (status) => {
   switch (status) {
     case 'DISPONIBLE': return 'success';
     case 'ÚLTIMAS ENTRADAS': return 'warning';
-    case 'AGOTADO': return 'critical';
+    case 'AGOTADO': return 'danger';
     default: return 'neutral';
   }
 };
 
-export const fetchEvents = async () => {
-  const response = await api.get('/events');
-  const backendEvents = response.data;
+export const fetchEvents = async (params = {}) => {
+  try {
+    const response = await api.get('/events', { params });
+    const backendEvents = response.data;
 
-  return backendEvents.map(evt => ({
-    id: evt._id,
-    title: evt.nombre,
-    imageUrl: evt.imagen,
-    genres: evt.generos || [],
-    date: formatDate(evt.fecha),
-    time: `${evt.hora} HS`,
-    venue: evt.lugar,
-    price: formatPrice(evt.precio),
-    artists: evt.artistas || [],
-    status: evt.estado,
-    statusTone: mapStatusTone(evt.estado),
-    highlighted: false // Por defecto, se puede manejar lógica extra luego
-  }));
+    return backendEvents.map(evt => ({
+      id: evt._id,
+      title: evt.nombre,
+      imageUrl: evt.imagen || 'https://via.placeholder.com/400',
+      genres: evt.generos || [],
+      date: evt.fecha ? formatDate(evt.fecha) : 'Fecha a confirmar',
+      time: evt.hora ? `${evt.hora} HS` : '',
+      venue: evt.lugar || 'Lugar a confirmar',
+      price: evt.precio !== undefined ? formatPrice(evt.precio) : formatPrice(0),
+      artists: evt.artistas || [],
+      status: evt.estado || 'DISPONIBLE',
+      statusTone: mapStatusTone(evt.estado || 'DISPONIBLE'),
+      highlighted: false
+    }));
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    throw new Error(error.response?.data?.mensaje || "Error al obtener eventos del servidor");
+  }
+};
+
+export const fetchEventById = async (id) => {
+  try {
+    const response = await api.get(`/events/${id}`);
+    const evt = response.data;
+    
+    return {
+      id: evt._id,
+      title: evt.nombre,
+      imageUrl: evt.imagen || 'https://via.placeholder.com/400',
+      genres: evt.generos || [],
+      date: evt.fecha ? formatDate(evt.fecha) : 'Fecha a confirmar',
+      time: evt.hora ? `${evt.hora} HS` : '',
+      venue: evt.lugar || 'Lugar a confirmar',
+      price: evt.precio !== undefined ? formatPrice(evt.precio) : formatPrice(0),
+      artists: evt.artistas || [],
+      status: evt.estado || 'DISPONIBLE',
+      statusTone: mapStatusTone(evt.estado || 'DISPONIBLE'),
+    };
+  } catch (error) {
+    console.error(`Error fetching event ${id}:`, error);
+    throw new Error(error.response?.data?.mensaje || "Error al obtener detalles del evento");
+  }
 };
