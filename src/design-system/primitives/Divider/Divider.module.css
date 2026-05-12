@@ -1,0 +1,45 @@
+.divider {
+  border: none;
+  height: 1px;
+  margin: 0;
+  width: 100%;
+}
+
+/* Variantes de color */
+.subtle {
+  background: var(--ds-color-border-editorial);
+}
+
+.strong {
+  background: var(--ds-color-border-strong);
+}
+
+.accent {
+  background: var(--ds-color-accent-primary);
+}
+
+.accent-fuchsia {
+  background: var(--ds-color-accent-secondary);
+}
+
+/* Con etiqueta central */
+.withLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  width: 100%;
+}
+
+.withLabel .line {
+  flex: 1;
+  height: 1px;
+}
+
+.label {
+  font-size: var(--ds-font-size-100);
+  font-weight: var(--ds-font-weight-extrabold);
+  letter-spacing: var(--ds-tracking-widest);
+  text-transform: uppercase;
+  color: var(--ds-color-text-editorial-muted);
+  white-space: nowrap;
+}

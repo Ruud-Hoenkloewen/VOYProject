@@ -316,6 +316,47 @@
   margin: 0;
 }
 
+/* ── ERROR GLOBAL DEL BACKEND ────────── */
+.apiError {
+  background: rgba(255, 68, 68, 0.08);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  color: #ff6666;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── CONTRASEÑA CON OJO ──────────────── */
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputWithIcon {
+  padding-right: 2.75rem; /* espacio para el botón del ojo */
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  color: inherit;
+}
+
+.eyeBtn:hover {
+  opacity: 1;
+}
+
 /* ── RESPONSIVE ──────────────────────── */
 @media (max-width: 768px) {
   .main {
@@ -333,5 +374,43 @@
 
   .nav {
     padding: 1.2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 1rem 1.1rem;
+  }
+
+  .formSection {
+    padding: 2rem 1.1rem;
+  }
+
+  .formTitle {
+    font-size: 1.35rem;
+  }
+
+  .formSubtitle {
+    font-size: 0.8rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  .submitBtn {
+    font-size: 0.68rem;
+    padding: 0.85rem 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .formSection {
+    padding: 1.75rem 0.9rem;
+  }
+
+  .formTitle {
+    font-size: 1.2rem;
   }
 }

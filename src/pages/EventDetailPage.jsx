@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchEventById } from "../services/eventService";
 import Button from "../design-system/primitives/Button/Button";
@@ -25,26 +25,27 @@ export default function EventDetailPage() {
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [imgError, setImgError] = useState(false);
+
+  const getEventDetail = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await fetchEventById(id);
+      setEventData(data);
+    } catch (err) {
+      console.error("Error fetching event details:", err);
+      setError(err.response?.status === 404 ? 'not_found' : 'network_error');
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
 
   useEffect(() => {
-    const getEventDetail = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await fetchEventById(id);
-        setEventData(data);
-      } catch (err) {
-        console.error("Error fetching event details:", err);
-        setError(err.response?.status === 404 ? 'not_found' : 'network_error');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (id) {
       getEventDetail();
     }
-  }, [id]);
+  }, [id, getEventDetail]);
 
   if (loading) {
     return (
@@ -56,10 +57,10 @@ export default function EventDetailPage() {
           <Card className={`${styles.maxCard} ${styles.skeletonCard}`}>
              <div className={`${styles.mediaSection} ${styles.skeletonPulse}`} />
              <div className={styles.contentSection}>
-               <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{width: '20%', height: '24px'}} />
-               <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{width: '80%', height: '48px', marginTop: '16px'}} />
-               <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{width: '60%', height: '24px', marginTop: '32px'}} />
-               <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{width: '40%', height: '24px', marginTop: '16px'}} />
+               <div className={`${styles.skeletonPulse} ${styles.skeletonBadge}`} />
+               <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+               <div className={`${styles.skeletonPulse} ${styles.skeletonDetail}`} />
+               <div className={`${styles.skeletonPulse} ${styles.skeletonDetailShort}`} />
              </div>
           </Card>
         </main>
@@ -86,7 +87,7 @@ export default function EventDetailPage() {
         <Typography variant="h2">Ups, algo salió mal</Typography>
         <Typography variant="body" className={styles.errorMsg}>No pudimos cargar la información del evento. Por favor revisa tu conexión.</Typography>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-          <Button onClick={() => window.location.reload()} variant="primary">Reintentar</Button>
+          <Button onClick={getEventDetail} variant="primary">Reintentar</Button>
           <Button onClick={() => navigate("/events")} variant="ghost">← Volver a eventos</Button>
         </div>
       </div>
@@ -114,11 +115,12 @@ export default function EventDetailPage() {
           
           {/* LADO IZQUIERDO: IMAGEN */}
           <div className={styles.mediaSection}>
-            {eventData.imageUrl ? (
+            {eventData.imageUrl && !imgError ? (
               <img 
                 src={eventData.imageUrl} 
                 alt={eventData.title} 
                 className={styles.image}
+                onError={() => setImgError(true)}
               />
             ) : (
               <div className={styles.fallbackImage}>{eventData.title}</div>

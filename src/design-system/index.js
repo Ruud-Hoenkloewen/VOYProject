@@ -4,6 +4,8 @@ export { default as Card } from "./primitives/Card/Card";
 export { default as Input } from "./primitives/Input/Input";
 export { default as Badge } from "./primitives/Badge/Badge";
 export { default as Chip } from "./primitives/Chip/Chip";
+export { default as Divider } from "./primitives/Divider/Divider";
+export { default as SectionLabel } from "./primitives/SectionLabel/SectionLabel";
 export { default as Stack } from "./layout/Stack/Stack";
 export { default as Container } from "./layout/Container/Container";
 export { default as SearchBar } from "./composites/SearchBar/SearchBar";

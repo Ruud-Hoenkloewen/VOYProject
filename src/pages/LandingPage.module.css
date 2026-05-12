@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────
    LandingPage.module.css
    Estética editorial underground — Sub Pop / Factory Records / Pitchfork
-   Paleta: negro #080808 · verde ácido #c6ff00 · fucsia #d500f9
+   Paleta: negro var(--ds-color-bg-editorial) · verde ácido var(--ds-color-accent-primary) · fucsia var(--ds-color-accent-secondary)
 ───────────────────────────────────────── */
 
 /* ── ANIMACIONES DE SCROLL ─────────────── */
@@ -20,8 +20,8 @@
 /* Los estilos del header están en el componente compartido */
 
 .page {
-  background: #080808;
-  color: #ffffff;
+  background: var(--ds-color-bg-editorial);
+  color: var(--ds-color-text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   /* Compensa el header fixed (~60px) */
@@ -53,7 +53,7 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #d500f9;
+  color: var(--ds-color-accent-secondary);
   white-space: nowrap;
 }
 
@@ -63,7 +63,7 @@
   display: block;
   flex: 1;
   height: 1px;
-  background: #222;
+  background: var(--ds-color-border-editorial-mid);
 }
 
 .heroTitle {
@@ -76,7 +76,7 @@
 }
 
 .heroTitleAccent {
-  color: #c6ff00;
+  color: var(--ds-color-accent-primary);
 }
 
 .heroSubtitle {
@@ -84,13 +84,13 @@
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #666;
+  color: var(--ds-color-text-editorial-muted);
   margin: 0;
 }
 
 .heroDescription {
   font-size: 1rem;
-  color: #aaa;
+  color: var(--ds-color-text-editorial-subtle);
   line-height: 1.6;
   margin: 0;
   max-width: 420px;
@@ -125,7 +125,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #2e2e2e;
+  color: var(--ds-color-border-editorial);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
@@ -133,7 +133,7 @@
 
 .flyerMetaDot {
   font-size: 0.42rem;
-  color: #222;
+  color: var(--ds-color-border-editorial-mid);
 }
 
 @keyframes liveBlink {
@@ -142,7 +142,7 @@
 }
 
 .flyerMetaBlink {
-  color: #c6ff00;
+  color: var(--ds-color-accent-primary);
   animation: liveBlink 1.4s ease-in-out infinite;
 }
 
@@ -150,40 +150,40 @@
 /* ── BOTONES CTA ───────────────────────── */
 .ctaPrimary {
   display: inline-block;
-  background: #c6ff00;
-  color: #080808;
+  background: var(--ds-color-accent-primary);
+  color: var(--ds-color-bg-editorial);
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
-  border: 2px solid #c6ff00;
+  border: 2px solid var(--ds-color-accent-primary);
   transition: background 0.2s, color 0.2s;
 }
 
 .ctaPrimary:hover {
-  background: #080808;
-  color: #c6ff00;
+  background: var(--ds-color-bg-editorial);
+  color: var(--ds-color-accent-primary);
 }
 
 .ctaSecondary {
   display: inline-block;
   background: transparent;
-  color: #fff;
+  color: var(--ds-color-text-primary);
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
-  border: 2px solid #fff;
+  border: 2px solid var(--ds-color-text-primary);
   transition: background 0.2s, color 0.2s;
 }
 
 .ctaSecondary:hover {
-  background: #fff;
-  color: #080808;
+  background: var(--ds-color-text-primary);
+  color: var(--ds-color-bg-editorial);
 }
 
 /* ── BARRA "SHOW DESTACADO" (pre-hero) ─── */
@@ -199,8 +199,8 @@
   text-align: center;
   /* Override del ctaPrimary: reemplaza lime por monocromo editorial */
   background: transparent !important;
-  color: #888 !important;
-  border-color: #2a2a2a !important;
+  color: var(--ds-color-text-editorial-subtle) !important;
+  border-color: var(--ds-color-border-editorial-mid) !important;
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   padding: 0.65rem 1.5rem;
@@ -208,9 +208,9 @@
 }
 
 .ctaFull:hover {
-  background: #fff !important;
-  color: #080808 !important;
-  border-color: #fff !important;
+  background: var(--ds-color-text-primary) !important;
+  color: var(--ds-color-bg-editorial) !important;
+  border-color: var(--ds-color-text-primary) !important;
 }
 
 /* ── FLYER CARD — estructura 3 capas ─────────────────────
@@ -252,7 +252,7 @@
   position: absolute;
   width: 18px;
   height: 18px;
-  border-color: #c6ff00;
+  border-color: var(--ds-color-accent-primary);
   border-style: solid;
   pointer-events: none;
   z-index: 3;
@@ -283,9 +283,9 @@
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #888;
+  color: var(--ds-color-text-editorial-subtle);
   text-decoration: none;
-  border: 1px solid #2a2a2a;
+  border: 1px solid var(--ds-color-border-editorial-mid);
   padding: 0.55rem 1.4rem;
   background: transparent;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -293,9 +293,9 @@
 }
 
 .flyerEventLink:hover {
-  background: #fff;
-  color: #080808;
-  border-color: #fff;
+  background: var(--ds-color-text-primary);
+  color: var(--ds-color-bg-editorial);
+  border-color: var(--ds-color-text-primary);
 }
 
 .flyerImg {
@@ -317,7 +317,7 @@
 
 .heroBracketCard {
   position: relative;
-  background: #111;
+  background: var(--ds-color-border-editorial);
   padding: 2rem;
   width: 100%;
   max-width: 340px;
@@ -328,7 +328,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  border-color: #c6ff00;
+  border-color: var(--ds-color-accent-primary);
   border-style: solid;
 }
 
@@ -354,46 +354,46 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #c6ff00;
+  color: var(--ds-color-accent-primary);
   text-transform: uppercase;
 }
 
 .bracketCardArtists {
   font-size: 1rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--ds-color-text-primary);
   margin: 0;
   line-height: 1.3;
 }
 
 .bracketCardGenre {
   display: inline-block;
-  background: #222;
-  color: #d500f9;
+  background: var(--ds-color-border-editorial-mid);
+  color: var(--ds-color-accent-secondary);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   padding: 0.2rem 0.5rem;
-  border: 1px solid #d500f9;
+  border: 1px solid var(--ds-color-accent-secondary);
   width: fit-content;
 }
 
 .bracketCardVenue {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--ds-color-text-editorial-subtle);
   margin: 0;
 }
 
 .bracketCardPrice {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #c6ff00;
+  color: var(--ds-color-accent-primary);
   margin-top: 0.25rem;
 }
 
 /* ── MARQUEE TICKER ────────────────────── */
 .marqueeWrapper {
-  background: #c6ff00;
+  background: var(--ds-color-accent-primary);
   overflow: hidden;
   padding: 0.6rem 0;
   white-space: nowrap;
@@ -405,7 +405,7 @@
 }
 
 .marqueeItem {
-  color: #080808;
+  color: var(--ds-color-bg-editorial);
   font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -438,14 +438,14 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #d500f9;
+  color: var(--ds-color-accent-secondary);
   white-space: nowrap;
 }
 
 .sectionDivider {
   flex: 1;
   height: 1px;
-  background: #222;
+  background: var(--ds-color-border-editorial-mid);
   /* Sin margin-bottom: vive dentro del flex row, al lado del label */
 }
 
@@ -455,14 +455,14 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #666;
+  color: var(--ds-color-text-editorial-muted);
   text-decoration: none;
   white-space: nowrap;
   transition: color 0.2s;
 }
 
 .seeAllLink:hover {
-  color: #c6ff00;
+  color: var(--ds-color-accent-primary);
 }
 
 /* ── QUÉ ES VOY ────────────────────────── */
@@ -473,7 +473,7 @@
 }
 
 .featureCard {
-  border: 1px solid #1a1a1a;
+  border: 1px solid var(--ds-color-border-editorial);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -482,8 +482,8 @@
 }
 
 .featureCard:hover {
-  border-color: #c6ff00;
-  background: #0f0f0f;
+  border-color: var(--ds-color-accent-primary);
+  background: var(--ds-color-bg-editorial-surface);
 }
 
 .featureIcon {
@@ -496,12 +496,12 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
-  color: #fff;
+  color: var(--ds-color-text-primary);
 }
 
 .featureDescription {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--ds-color-text-editorial-subtle);
   line-height: 1.5;
   margin: 0;
 }
@@ -569,40 +569,122 @@
   margin-top: 1rem;
 }
 
-/* ── GÉNEROS ───────────────────────────── */
+/* ── GÉNEROS — LA ESCENA ───────────────── */
 .genresGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
 }
 
+.genreCard {
+  border: 1px solid var(--ds-color-border-editorial);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, background 0.2s, opacity 0.5s ease, transform 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Línea fucsia en la parte superior al hacer hover */
+.genreCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ds-color-accent-secondary);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+  transform-origin: left;
+}
+
+.genreCard:hover {
+  border-color: var(--ds-color-accent-secondary);
+  background: var(--ds-color-bg-editorial-surface);
+}
+
+.genreCard:hover::before {
+  transform: scaleX(1);
+}
+
+.genreCardIcon {
+  font-size: 1.75rem;
+}
+
+.genreCardName {
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: var(--ds-color-text-primary);
+  transition: color 0.2s;
+}
+
+.genreCard:hover .genreCardName {
+  color: var(--ds-color-accent-secondary);
+}
+
+.genreCardDesc {
+  font-size: 0.82rem;
+  color: var(--ds-color-text-editorial-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive genresGrid */
+@media (max-width: 1024px) {
+  .genresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .genresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .genresGrid {
+    grid-template-columns: 1fr;
+  }
+  .genreCard {
+    padding: 1.5rem 1.1rem;
+  }
+}
+
+/* Clase chip legacy — mantenida por si algo la referencia */
 .genreChip {
-  border: 1px solid #333;
-  color: #666;
+  border: 1px solid var(--ds-color-border-editorial-mid);
+  color: var(--ds-color-text-editorial-muted);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.4rem 1rem;
-  transition: border-color 0.2s, color 0.2s, opacity 0.5s ease, transform 0.5s ease;
+  transition: border-color 0.2s, color 0.2s;
   cursor: default;
 }
 
 .genreChip:hover {
-  border-color: #d500f9;
-  color: #d500f9;
+  border-color: var(--ds-color-accent-secondary);
+  color: var(--ds-color-accent-secondary);
 }
+
 
 /* ── FOOTER ───────────────────────────────────────────── */
 .footer {
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid var(--ds-color-border-editorial);
   margin-top: 2rem;
 }
 
 .footerBar {
-  background: #c6ff00;
-  color: #080808;
+  background: var(--ds-color-accent-primary);
+  color: var(--ds-color-bg-editorial);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -615,9 +697,10 @@
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
-    padding: 5rem 2rem 3rem;
+    padding: 5rem 2.5rem 3rem;
     text-align: center;
     min-height: auto;
+    gap: 3rem;
   }
 
   .heroDecoration {
@@ -630,6 +713,23 @@
 
   .heroDescription {
     max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .heroEyebrow {
+    justify-content: center;
+  }
+
+  .heroEyebrow::after {
+    display: none;
+  }
+
+  .flyerOuter {
+    align-items: center;
+  }
+
+  .flyerImg {
+    max-width: 280px;
   }
 
   .featuresGrid {
@@ -646,6 +746,10 @@
     padding: 3rem 2rem;
   }
 
+  .heroSectionLabel {
+    padding: 0 2rem;
+  }
+
   .footerMain {
     padding: 2rem;
     flex-direction: column;
@@ -654,6 +758,11 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding: 4.5rem 1.5rem 2.5rem;
+    gap: 2.5rem;
+  }
+
   .heroTitle {
     font-size: clamp(3rem, 15vw, 5rem);
   }
@@ -672,7 +781,130 @@
     padding: 2.5rem 1.25rem;
   }
 
+  .heroSectionLabel {
+    padding: 0 1.25rem;
+  }
+
+  .eventsTickerItem {
+    flex: 0 0 280px;
+  }
+
+  .footerBar {
+    font-size: 0.62rem;
+    padding: 0.65rem 1rem;
+    line-height: 1.8;
+  }
+
   .footerNav {
     gap: 1rem;
+  }
+}
+
+/* ── MOBILE S ─ ≤480px ──────────────────── */
+@media (max-width: 480px) {
+  .page {
+    padding-top: 56px;
+  }
+
+  .hero {
+    padding: 2.5rem 1.1rem 2rem;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.6rem, 18vw, 4rem);
+    line-height: 0.92;
+  }
+
+  .heroSubtitle {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+  }
+
+  .heroDescription {
+    font-size: 0.9rem;
+  }
+
+  .flyerImg {
+    max-width: 240px;
+  }
+
+  .flyerEventLink {
+    font-size: 0.6rem;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .flyerMeta {
+    display: none; /* demasiado texto en pantallas muy chicas */
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    font-size: 0.72rem;
+    padding: 0.7rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .features,
+  .eventsPreview,
+  .genresSection {
+    padding: 2rem 1rem;
+  }
+
+  .sectionLabel {
+    font-size: 0.65rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .eventsTickerItem {
+    flex: 0 0 260px;
+  }
+
+  .marqueeItem {
+    font-size: 0.65rem;
+    padding: 0 1.2rem;
+  }
+
+  .genreChip {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .footerBar {
+    font-size: 0.55rem;
+    padding: 0.6rem 0.75rem;
+    line-height: 2;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ── MOBILE XS ─ ≤360px ─────────────────── */
+@media (max-width: 360px) {
+  .heroTitle {
+    font-size: clamp(2.2rem, 20vw, 3.2rem);
+  }
+
+  .flyerImg {
+    max-width: 200px;
+  }
+
+  .features,
+  .eventsPreview,
+  .genresSection {
+    padding: 1.75rem 0.85rem;
+  }
+
+  .eventsTickerItem {
+    flex: 0 0 230px;
   }
 }

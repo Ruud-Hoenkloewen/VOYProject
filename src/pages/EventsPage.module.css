@@ -153,3 +153,41 @@
     max-width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .pageContainer {
+    padding-top: calc(56px + 1.5rem);
+    padding-bottom: 3rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.8rem, 12vw, 3rem);
+  }
+
+  .heroSubtitle {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .eventsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .filtersRow {
+    gap: 1.25rem;
+  }
+
+  .filterGroupLarge {
+    flex: 1 1 100%;
+  }
+
+  .filterGroupSmall {
+    flex: 1 1 100%;
+  }
+
+  .genreBtn {
+    font-size: 0.65rem;
+    padding: 0.22rem 0.65rem;
+  }
+}

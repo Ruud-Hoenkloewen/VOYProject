@@ -74,6 +74,6 @@ export const fetchEventById = async (id) => {
     };
   } catch (error) {
     console.error(`Error fetching event ${id}:`, error);
-    throw new Error(error.response?.data?.mensaje || "Error al obtener detalles del evento");
+    throw error; // Re-lanzamos el error original para preservar error.response.status (ej: 404)
   }
 };

@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  margin-bottom: var(--ds-space-8);
+
+  /* Soporte data-animate — heredado del scroll observer global */
+  opacity: 1;
+  transform: none;
+}
+
+.label {
+  font-size: var(--ds-font-size-100);
+  font-weight: var(--ds-font-weight-extrabold);
+  letter-spacing: var(--ds-tracking-widest);
+  text-transform: uppercase;
+  color: var(--ds-color-accent-secondary);
+  white-space: nowrap;
+}
+
+.divider {
+  flex: 1;
+  height: 1px;
+  background: var(--ds-color-border-editorial);
+}
+
+/* Elemento opcional a la derecha (link, botón, etc.) */
+.action {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Spacer vacío para cuando no hay acción — mantiene el layout */
+.spacer {
+  display: none;
+}

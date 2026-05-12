@@ -22,4 +22,14 @@
   --ds-color-state-success: var(--ds-color-lime-400);
   --ds-color-state-danger: var(--ds-color-red-400);
   --ds-color-state-highlight: var(--ds-color-magenta-400);
+
+  /* Aliases semánticos editoriales — landing page + brand */
+  --ds-color-bg-editorial: var(--ds-color-brand-canvas);
+  --ds-color-accent-primary: var(--ds-color-brand-lime);
+  --ds-color-accent-secondary: var(--ds-color-brand-fuchsia);
+  --ds-color-text-editorial-muted: var(--ds-color-editorial-muted);
+  --ds-color-text-editorial-subtle: var(--ds-color-editorial-subtle);
+  --ds-color-border-editorial: var(--ds-color-editorial-border);
+  --ds-color-border-editorial-mid: var(--ds-color-editorial-border-mid);
+  --ds-color-bg-editorial-surface: var(--ds-color-editorial-surface);
 }

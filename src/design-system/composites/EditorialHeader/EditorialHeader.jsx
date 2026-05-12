@@ -1,19 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 import styles from "./EditorialHeader.module.css";
 
 /**
  * COMPONENTE: EditorialHeader
  * Header editorial compartido — scroll-aware con hide/show por dirección.
- *
- * Comportamiento (inspirado en Warp Records):
- *  - Scrolleando ABAJO → se oculta completamente (translateY -100%)
- *  - Scrolleando ARRIBA o en el TOP → reaparece
- *  - Paleta monocromática suave: sin neon, sin blur, solo negro/blanco/gris.
+ * Mobile: menú hamburguesa con drawer animado.
  */
 export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login" }) {
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [hidden, setHidden] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
 
   useEffect(() => {
     const onScroll = () => {
@@ -21,13 +26,11 @@ export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login"
       const delta = currentY - lastScrollY.current;
 
       if (currentY < 10) {
-        // Siempre visible en el tope
         setHidden(false);
       } else if (delta > 6) {
-        // Scrolleando abajo: ocultar
         setHidden(true);
+        setMenuOpen(false); // cerrar menu al scrollear
       } else if (delta < -6) {
-        // Scrolleando arriba: mostrar
         setHidden(false);
       }
 
@@ -38,55 +41,107 @@ export default function EditorialHeader({ ctaLabel = "ACCEDER", ctaTo = "/login"
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Bloquear scroll del body cuando el menú está abierto
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const NAV_LINKS = [
+    { to: "/", label: "INICIO", end: true },
+    { to: "/events", label: "EXPLORAR EVENTOS" },
+    { to: "/artistas", label: "ARTISTAS" },
+    { to: "/info", label: "INFO" },
+  ];
+
   return (
-    <header className={`${styles.header} ${hidden ? styles.hidden : ""}`}>
-      {/* LOGO */}
-      <Link to="/" className={styles.logo}>
-        <span className={styles.logoBox}>V</span>
-        <span className={styles.logoText}>VOY PROJECT</span>
-      </Link>
+    <>
+      <header className={`${styles.header} ${hidden ? styles.hidden : ""}`}>
+        {/* LOGO */}
+        <Link to="/" className={styles.logo} onClick={closeMenu}>
+          <span className={styles.logoBox}>V</span>
+          <span className={styles.logoText}>VOY PROJECT</span>
+        </Link>
 
-      {/* NAV LINKS */}
-      <nav className={styles.nav}>
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) =>
-            `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
-          }
-        >
-          INICIO
-        </NavLink>
-        <NavLink
-          to="/events"
-          className={({ isActive }) =>
-            `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
-          }
-        >
-          EXPLORAR EVENTOS
-        </NavLink>
-        <NavLink
-          to="/artistas"
-          className={({ isActive }) =>
-            `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
-          }
-        >
-          ARTISTAS
-        </NavLink>
-        <NavLink
-          to="/info"
-          className={({ isActive }) =>
-            `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
-          }
-        >
-          INFO
-        </NavLink>
-      </nav>
+        {/* NAV LINKS — desktop */}
+        <nav className={styles.nav}>
+          {NAV_LINKS.map(({ to, label, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
-      {/* CTA */}
-      <Link to={ctaTo} className={styles.cta}>
-        {ctaLabel}
-      </Link>
-    </header>
+        {/* CTA / Usuario — desktop */}
+        {isAuthenticated ? (
+          <div className={styles.userArea}>
+            <span className={styles.userName}>◆ {user?.nombre}</span>
+            <button className={styles.cta} onClick={handleLogout}>SALIR</button>
+          </div>
+        ) : (
+          <Link to={ctaTo} className={`${styles.cta} ${styles.ctaDesktop}`}>
+            {ctaLabel}
+          </Link>
+        )}
+
+        {/* HAMBURGER — mobile only */}
+        <button
+          className={styles.hamburger}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuOpen}
+        >
+          <span className={`${styles.hamburgerBar} ${menuOpen ? styles.barTop : ""}`} />
+          <span className={`${styles.hamburgerBar} ${menuOpen ? styles.barMid : ""}`} />
+          <span className={`${styles.hamburgerBar} ${menuOpen ? styles.barBot : ""}`} />
+        </button>
+      </header>
+
+      {/* MOBILE DRAWER */}
+      <div
+        className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <nav className={styles.drawerNav}>
+          {NAV_LINKS.map(({ to, label, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `${styles.drawerLink} ${isActive ? styles.drawerLinkActive : ""}`
+              }
+              onClick={closeMenu}
+            >
+              {label}
+            </NavLink>
+          ))}
+          {isAuthenticated ? (
+            <button className={styles.drawerCta} onClick={() => { handleLogout(); closeMenu(); }}>
+              SALIR
+            </button>
+          ) : (
+            <Link to={ctaTo} className={styles.drawerCta} onClick={closeMenu}>
+              {ctaLabel}
+            </Link>
+          )}
+        </nav>
+        <p className={styles.drawerFooter}>VOY PROJECT · TUCUMÁN · 2026</p>
+      </div>
+
+      {/* OVERLAY */}
+      {menuOpen && (
+        <div className={styles.drawerOverlay} onClick={closeMenu} aria-hidden="true" />
+      )}
+    </>
   );
 }

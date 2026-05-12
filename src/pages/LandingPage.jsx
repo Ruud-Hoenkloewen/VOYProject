@@ -30,6 +30,49 @@ const FEATURES = [
   },
 ];
 
+const GENRES = [
+  {
+    icon: "⚡",
+    name: "Punk",
+    description: "Rápido, corto y sin filtros. La energía en su forma más honesta.",
+  },
+  {
+    icon: "🔥",
+    name: "Hardcore",
+    description: "Más pesado, más intenso. El pogo llevado al límite.",
+  },
+  {
+    icon: "🌀",
+    name: "Post-Hardcore",
+    description: "Emociones crudas y estructuras que no siguen reglas.",
+  },
+  {
+    icon: "🎸",
+    name: "Rock Alternativo",
+    description: "Fuera del mainstream. Riffs que cuentan historias propias.",
+  },
+  {
+    icon: "🌧️",
+    name: "Grunge",
+    description: "Sucio, oscuro y real. El sonido que no pide disculpas.",
+  },
+  {
+    icon: "🤘",
+    name: "Metal",
+    description: "Pesado y preciso. Desde el thrash hasta el doom más lento.",
+  },
+  {
+    icon: "📻",
+    name: "Noise Rock",
+    description: "Caos como lenguaje. Distorsión convertida en arte.",
+  },
+  {
+    icon: "✨",
+    name: "Pop Underground",
+    description: "Melodías que no piden permiso. Lo indie con actitud.",
+  },
+];
+
 /**
  * HOOK: useScrollAnimation
  * Aplica la clase 'visible' a elementos con data-animate cuando entran al viewport.
@@ -199,6 +242,29 @@ export default function LandingPage() {
               <span className={styles.featureIcon}>{f.icon}</span>
               <h3 className={styles.featureTitle}>{f.title}</h3>
               <p className={styles.featureDescription}>{f.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── LA ESCENA — GÉNEROS ─────────────────────────────── */}
+      <section className={styles.genresSection}>
+        <div className={styles.sectionHeader} data-animate>
+          <span className={styles.sectionLabel}>♦ LA ESCENA</span>
+          <div className={styles.sectionDivider} />
+          <span className={styles.sectionSpacer} />
+        </div>
+        <div className={styles.genresGrid}>
+          {GENRES.map((g, i) => (
+            <div
+              key={i}
+              className={styles.genreCard}
+              data-animate
+              style={{ transitionDelay: `${i * 60}ms` }}
+            >
+              <span className={styles.genreCardIcon}>{g.icon}</span>
+              <h3 className={styles.genreCardName}>{g.name}</h3>
+              <p className={styles.genreCardDesc}>{g.description}</p>
             </div>
           ))}
         </div>

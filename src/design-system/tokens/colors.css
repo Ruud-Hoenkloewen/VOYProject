@@ -8,6 +8,19 @@
   --ds-color-neutral-700: #c2c7d5;
   --ds-color-neutral-900: #f4f6fb;
 
+  /* Brand editorial — paleta underground */
+  --ds-color-brand-canvas: #080808;   /* fondo más oscuro que neutral-0, editorial */
+  --ds-color-brand-lime: #c6ff00;     /* verde ácido editorial (más brillante que lime-300) */
+  --ds-color-brand-fuchsia: #d500f9; /* fucsia principal del branding */
+  --ds-color-brand-fuchsia-dark: #9a00b3; /* fucsia oscuro para variantes */
+
+  /* Grises editoriales intermedios */
+  --ds-color-editorial-border: #1a1a1a;  /* borde sutil sobre canvas editorial */
+  --ds-color-editorial-border-mid: #2a2a2a; /* borde medio (inputs, chips) */
+  --ds-color-editorial-muted: #666666;   /* texto muted editorial */
+  --ds-color-editorial-subtle: #888888;  /* texto subtle editorial */
+  --ds-color-editorial-surface: #0f0f0f; /* surface hover sobre canvas editorial */
+
   --ds-color-lime-300: #b8ff2c;
   --ds-color-lime-400: #a6ef1f;
   --ds-color-lime-500: #92dc08;

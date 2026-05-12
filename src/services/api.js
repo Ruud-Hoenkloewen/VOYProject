@@ -6,8 +6,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  // Acá puedes inyectar el token si el usuario está logueado
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('voy_token'); // clave centralizada en AuthContext
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

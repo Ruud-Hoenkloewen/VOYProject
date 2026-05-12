@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { registerUser } from "../services/authService";
 import styles from "./RegisterPage.module.css";
 
 /**
@@ -7,15 +9,19 @@ import styles from "./RegisterPage.module.css";
  * Ruta: /register
  */
 export default function RegisterPage() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
-  const [errors, setErrors] = useState({});
+  const navigate    = useNavigate();
+  const { login }   = useAuth();
+
+  const [form,       setForm]       = useState({ name: "", email: "", password: "", confirmPassword: "" });
+  const [errors,     setErrors]     = useState({});
+  const [apiError,   setApiError]   = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    if (errors[name])  setErrors((prev)  => ({ ...prev, [name]: "" }));
+    if (apiError)      setApiError("");
   }
 
   function validate() {
@@ -29,13 +35,24 @@ export default function RegisterPage() {
     return next;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+
     setSubmitting(true);
-    // TODO: conectar con el backend
-    setTimeout(() => { setSubmitting(false); navigate("/events"); }, 1200);
+    setApiError("");
+
+    try {
+      const data = await registerUser(form.name, form.email, form.password);
+      login({ _id: data._id, nombre: data.nombre, email: data.email }, data.token);
+      navigate("/");
+    } catch (err) {
+      const msg = err.response?.data?.mensaje || "Error al crear la cuenta. Intentá de nuevo.";
+      setApiError(msg);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -79,6 +96,13 @@ export default function RegisterPage() {
           <div className={styles.formCard}>
             <h1 className={styles.formTitle}>Creá tu cuenta</h1>
             <p className={styles.formSubtitle}>Unite a la escena — es gratis</p>
+
+            {/* Error global del backend */}
+            {apiError && (
+              <div className={styles.apiError} role="alert">
+                {apiError}
+              </div>
+            )}
 
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
               <div className={styles.field}>
