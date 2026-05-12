@@ -1,15 +1,26 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "../context/AuthContext";
-import LandingPage from "../pages/LandingPage";
-import EventsPage from "../pages/EventsPage";
-import EventDetailPage from "../pages/EventDetailPage";
-import RegisterPage from "../pages/RegisterPage";
-import LoginPage from "../pages/LoginPage";
 
-/**
- * Si el usuario ya está autenticado y navega a /login → redirigir a /.
- * Evita mostrar el formulario de login a alguien que ya inició sesión.
- */
+// ── Lazy loading — cada ruta descarga su chunk solo cuando se necesita
+const LandingPage     = lazy(() => import("../pages/LandingPage"));
+const EventsPage      = lazy(() => import("../pages/EventsPage"));
+const EventDetailPage = lazy(() => import("../pages/EventDetailPage"));
+const RegisterPage    = lazy(() => import("../pages/RegisterPage"));
+const LoginPage       = lazy(() => import("../pages/LoginPage"));
+
+/** Fallback minimalista durante la carga del chunk */
+function PageLoader() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ color: "#333", fontSize: "0.7rem", letterSpacing: "0.2em", fontFamily: "monospace" }}>
+        CARGANDO...
+      </span>
+    </div>
+  );
+}
+
+/** Redirige a / si el usuario ya está autenticado */
 function ProtectedLoginRoute() {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />;
@@ -20,20 +31,21 @@ function ProtectedLoginRoute() {
  * - LandingPage      → EditorialHeader con nav links
  * - EventsPage       → Navbar con buscador
  * - EventDetailPage  → Navbar minimalista
- * - RegisterPage     → nav mínima
- * - LoginPage        → nav mínima (reutiliza RegisterPage.module.css)
+ * - RegisterPage / LoginPage → nav mínima
  */
 export default function AppRouter() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/"           element={<LandingPage />} />
-          <Route path="/events"     element={<EventsPage />} />
-          <Route path="/events/:id" element={<EventDetailPage />} />
-          <Route path="/register"   element={<RegisterPage />} />
-          <Route path="/login"      element={<ProtectedLoginRoute />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/"           element={<LandingPage />} />
+            <Route path="/events"     element={<EventsPage />} />
+            <Route path="/events/:id" element={<EventDetailPage />} />
+            <Route path="/register"   element={<RegisterPage />} />
+            <Route path="/login"      element={<ProtectedLoginRoute />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   );
