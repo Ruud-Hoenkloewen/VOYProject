@@ -17,7 +17,6 @@ export const useEvents = (params = {}) => {
         setEvents(data);
         setError(null);
       } catch (err) {
-        console.error("Error fetching events:", err);
         setError(err.message || "Error al cargar los eventos");
       } finally {
         setIsLoading(false);

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useEvents } from "../hooks/useEvents";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import EventCard from "../design-system/composites/EventCard/EventCard";
 import EditorialHeader from "../design-system/composites/EditorialHeader/EditorialHeader";
 import styles from "./LandingPage.module.css";
-
 
 
 const FEATURES = [
@@ -73,31 +73,6 @@ const GENRES = [
   },
 ];
 
-/**
- * HOOK: useScrollAnimation
- * Aplica la clase 'visible' a elementos con data-animate cuando entran al viewport.
- * Usa Intersection Observer API nativa — sin librerías externas.
- */
-function useScrollAnimation() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(styles.visible);
-            observer.unobserve(entry.target); // animar solo una vez
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll("[data-animate]");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-}
 
 /**
  * FlyerCard — Imagen del flyer con tilt 3D reactivo al mouse + esquinas bracket
