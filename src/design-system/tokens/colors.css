@@ -10,9 +10,9 @@
 
   /* Brand editorial — paleta underground */
   --ds-color-brand-canvas: #080808;   /* fondo más oscuro que neutral-0, editorial */
-  --ds-color-brand-lime: #c6ff00;     /* verde ácido editorial (más brillante que lime-300) */
-  --ds-color-brand-fuchsia: #d500f9; /* fucsia principal del branding */
-  --ds-color-brand-fuchsia-dark: #9a00b3; /* fucsia oscuro para variantes */
+  --ds-color-brand-lime: #00ff9f;     /* Verde menta eléctrico */
+  --ds-color-brand-fuchsia: #00d1ff; /* Cyan editorial */
+  --ds-color-brand-fuchsia-dark: #0088cc; /* Cyan oscuro */
 
   /* Grises editoriales intermedios */
   --ds-color-editorial-border: #1a1a1a;  /* borde sutil sobre canvas editorial */
@@ -21,12 +21,12 @@
   --ds-color-editorial-subtle: #888888;  /* texto subtle editorial */
   --ds-color-editorial-surface: #0f0f0f; /* surface hover sobre canvas editorial */
 
-  --ds-color-lime-300: #b8ff2c;
-  --ds-color-lime-400: #a6ef1f;
-  --ds-color-lime-500: #92dc08;
-
-  --ds-color-magenta-400: #df32ff;
-  --ds-color-magenta-500: #c220e5;
+  --ds-color-lime-300: #33ffb2;
+  --ds-color-lime-400: #00ff9f;
+  --ds-color-lime-500: #00cc7f;
+  
+  --ds-color-magenta-400: #33daff;
+  --ds-color-magenta-500: #00d1ff;
 
   --ds-color-red-400: #ff3f48;
   --ds-color-yellow-300: #ffd84e;

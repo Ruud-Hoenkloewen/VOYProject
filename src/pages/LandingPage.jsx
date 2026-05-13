@@ -114,35 +114,41 @@ function FlyerCard() {
   return (
     // flyerOuter: contenedor columna SIN filter
     <div className={styles.flyerOuter}>
-      <div className={styles.flyerShadowWrap}>
-        <div
-          ref={cardRef}
-          className={styles.flyerCard}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          <span className={styles.flyerCornerTL} aria-hidden="true" />
-          <span className={styles.flyerCornerBR} aria-hidden="true" />
-          <img
-            src="/flyer-lacrifagia.png"
-            alt="Lacrifagia — 08.05.2026 Bar Floresta"
-            className={styles.flyerImg}
-            draggable={false}
-          />
-        </div>
+      {/* Eyebrow visible solo en mobile/tablet para acompañar al flyer cuando colapsa a 1 columna */}
+      <div className={styles.flyerEyebrowMobile}>
+        SHOW DESTACADO DE LA SEMANA - LUN 4 - DOM 10 ♦
       </div>
-      <Link to="/events" className={styles.flyerEventLink}>
-        VER DETALLES DEL EVENTO →
-      </Link>
-      {/* Meta strip del evento — datos decorativos contextales */}
-      <div className={styles.flyerMeta} aria-hidden="true">
-        <span>08.05.2026</span>
-        <span className={styles.flyerMetaDot}>◆</span>
-        <span>BAR FLORESTA</span>
-        <span className={styles.flyerMetaDot}>◆</span>
-        <span>POST-HARDCORE</span>
-        <span className={styles.flyerMetaDot}>◆</span>
-        <span className={styles.flyerMetaBlink}>● LIVE</span>
+      <div className={styles.flyerInnerCentered}>
+        <div className={styles.flyerShadowWrap}>
+          <div
+            ref={cardRef}
+            className={styles.flyerCard}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span className={styles.flyerCornerTL} aria-hidden="true" />
+            <span className={styles.flyerCornerBR} aria-hidden="true" />
+            <img
+              src="/flyer-lacrifagia.png"
+              alt="Lacrifagia — 08.05.2026 Bar Floresta"
+              className={styles.flyerImg}
+              draggable={false}
+            />
+          </div>
+        </div>
+        <Link to="/events" className={styles.flyerEventLink}>
+          VER DETALLES DEL EVENTO →
+        </Link>
+        {/* Meta strip del evento — datos decorativos contextales */}
+        <div className={styles.flyerMeta} aria-hidden="true">
+          <span>08.05.2026</span>
+          <span className={styles.flyerMetaDot}>◆</span>
+          <span>BAR FLORESTA</span>
+          <span className={styles.flyerMetaDot}>◆</span>
+          <span>POST-HARDCORE</span>
+          <span className={styles.flyerMetaDot}>◆</span>
+          <span className={styles.flyerMetaBlink}>● LIVE</span>
+        </div>
       </div>
     </div>
   );
@@ -170,8 +176,15 @@ export default function LandingPage() {
       <section className={styles.hero}>
         {/* Grain film overlay — textura análoga muy sutil */}
         <div className={styles.heroGrain} aria-hidden="true" />
+
+        {/* Barra superior conectada: BIENVENIDO ---- SHOW DESTACADO DE LA SEMANA */}
+        <div className={styles.heroTopBar}>
+          <span className={styles.heroEyebrowLeft}>♦ BIENVENIDO</span>
+          <div className={styles.heroTopBarLine} />
+          <span className={styles.heroEyebrowRight}>SHOW DESTACADO DE LA SEMANA - LUN 4 - DOM 10 ♦</span>
+        </div>
+
         <div className={styles.heroContent}>
-          <span className={styles.heroEyebrow}>♦ SHOW DESTACADO</span>
           <h1 className={styles.heroTitle}>
             WELCOME<br />
             TO THE<br />

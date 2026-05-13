@@ -32,9 +32,10 @@
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+  align-items: start;
+  align-content: start;
   min-height: 90vh;
-  padding: 6rem 4rem 4rem;
+  padding: 5.5rem 4rem 4rem;
   gap: 2rem;
   position: relative;
 }
@@ -45,7 +46,19 @@
   gap: 1.25rem;
 }
 
-.heroEyebrow {
+/* ── BARRA SUPERIOR CONECTADA (Desktop / Mobile) ── */
+.heroTopBar {
+  position: absolute;
+  top: 2.5rem;
+  left: 4rem;
+  right: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heroEyebrowLeft,
+.heroEyebrowRight {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -53,17 +66,27 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ds-color-accent-secondary);
+  color: var(--ds-color-accent-secondary); /* Usa el nuevo cyan global */
   white-space: nowrap;
 }
 
-/* Línea que se extiende a la derecha del eyebrow */
-.heroEyebrow::after {
-  content: '';
-  display: block;
+/* Línea extensora central para que se conecten ambos extremos */
+.heroTopBarLine {
   flex: 1;
   height: 1px;
   background: var(--ds-color-border-editorial-mid);
+}
+
+/* Versión responsive para pantallas pequeñas donde las columnas colapsan */
+.flyerEyebrowMobile {
+  display: none;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ds-color-accent-secondary);
+  text-align: center;
+  width: 100%;
 }
 
 .heroTitle {
@@ -76,7 +99,7 @@
 }
 
 .heroTitleAccent {
-  color: var(--ds-color-accent-primary);
+  color: var(--ds-color-accent-secondary); /* Usa el nuevo cyan global */
 }
 
 .heroSubtitle {
@@ -125,7 +148,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ds-color-border-editorial);
+  color: var(--ds-color-text-editorial-muted);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
@@ -218,6 +241,13 @@
    Separar el filter del tilt evita que el drop-shadow clip los spans de corner
 ───────────────────────────────────────────────────────── */
 .flyerOuter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+
+.flyerInnerCentered {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -369,12 +399,12 @@
 .bracketCardGenre {
   display: inline-block;
   background: var(--ds-color-border-editorial-mid);
-  color: var(--ds-color-accent-secondary);
+  color: #00d1ff;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   padding: 0.2rem 0.5rem;
-  border: 1px solid var(--ds-color-accent-secondary);
+  border: 1px solid #00d1ff;
   width: fit-content;
 }
 
@@ -438,7 +468,7 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ds-color-accent-secondary);
+  color: #00d1ff;
   white-space: nowrap;
 }
 
@@ -491,14 +521,14 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--ds-color-accent-secondary);
+  background: #00d1ff;
   transform: scaleX(0);
   transition: transform 0.2s ease;
   transform-origin: left;
 }
 
 .featureCard:hover {
-  border-color: var(--ds-color-accent-secondary);
+  border-color: #00d1ff;
   background: var(--ds-color-bg-editorial-surface);
 }
 
@@ -521,7 +551,7 @@
 }
 
 .featureCard:hover .featureTitle {
-  color: var(--ds-color-accent-secondary);
+  color: #00d1ff;
 }
 
 .featureDescription {
@@ -620,14 +650,14 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--ds-color-accent-secondary);
+  background: #00d1ff;
   transform: scaleX(0);
   transition: transform 0.2s ease;
   transform-origin: left;
 }
 
 .genreCard:hover {
-  border-color: var(--ds-color-accent-secondary);
+  border-color: #00d1ff;
   background: var(--ds-color-bg-editorial-surface);
 }
 
@@ -650,7 +680,7 @@
 }
 
 .genreCard:hover .genreCardName {
-  color: var(--ds-color-accent-secondary);
+  color: #00d1ff;
 }
 
 .genreCardDesc {
@@ -696,8 +726,8 @@
 }
 
 .genreChip:hover {
-  border-color: var(--ds-color-accent-secondary);
-  color: var(--ds-color-accent-secondary);
+  border-color: #00d1ff;
+  color: #00d1ff;
 }
 
 
@@ -741,12 +771,21 @@
     margin: 0 auto;
   }
 
-  .heroEyebrow {
+  .heroTopBar {
+    left: 0;
+    right: 0;
+    top: 2rem;
     justify-content: center;
   }
 
-  .heroEyebrow::after {
+  .heroTopBarLine,
+  .heroEyebrowRight {
     display: none;
+  }
+
+  .flyerEyebrowMobile {
+    display: block;
+    margin-bottom: 0.75rem;
   }
 
   .flyerOuter {
